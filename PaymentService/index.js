@@ -5,7 +5,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 //routes import
-import orderRoute from "./routes/order.route.js";
+import stripeRoute from "./routes/stripe.route.js";
 
 dotenv.config();
 
@@ -23,8 +23,8 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 
-app.listen(4001, () => {
-  console.log("Server is Running on Port 4001");
+app.listen(4002, () => {
+  console.log("Server is Running on Port 4002");
 });
 
 const corsOptions = {
@@ -34,10 +34,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 //api call
-app.use("/api/order", orderRoute);
+app.use("/api/stripe", stripeRoute);
 
 app.get("/", (req, res) => {
-  res.send("orser service API is working!");
+  res.send("payment service API is working!");
 });
 
 app.use((err, req, res, next) => {
