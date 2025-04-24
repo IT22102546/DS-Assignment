@@ -3,7 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
-import userRoute from "./routes/user.route.js";
+import adminRoute from "./routes/admin.route.js";
 
 dotenv.config();
 
@@ -33,14 +33,14 @@ const corsOptions = {
   origin: [
     'http://localhost:5173', 
     'http://frontend:5173',
-    'http://localhost:4000' 
+    'http://localhost:3999' 
   ],
   credentials: true,
 };
 app.use(cors(corsOptions));
 
 
-app.use("/api/user", userRoute);
+app.use("/api/admin", adminRoute);
 
 app.get("/", (req, res) => {
   res.status(200).json({ 
@@ -67,8 +67,8 @@ app.get('/health', (req, res) => {
 
 
 
-app.listen(4000, '0.0.0.0', () => { 
-  console.log('Server running on port 4000');
+app.listen(3999, '0.0.0.0', () => { 
+  console.log('Server running on port 3999');
 });
 
 process.on('SIGTERM', () => {

@@ -27,7 +27,7 @@ export default function SignIn() {
         try {
             setLoading(true);
             setError(false);
-            const url = isSignUp ? "/api/user/signup" : "/api/user/signin";
+            const url = isSignUp ? "http://localhost:4000/api/user/signup" : "http://localhost:4000/api/user/signin";
             const res = await fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

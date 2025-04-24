@@ -30,7 +30,7 @@ export default function DashUsers() {
     if (showAdminsOnly) {
       const fetchAdmins = async () => {
         try {
-          const res = await fetch('/api/user/getadmins');
+          const res = await fetch('http://localhost:3999/api/admin/getadmins');
           const data = await res.json();
           if (res.ok) {
             setUsers(data.admins);
@@ -44,7 +44,7 @@ export default function DashUsers() {
        } else if (showCustomersOnly) {
       const fetchCustomers = async () => {
         try {
-          const res = await fetch('/api/user/getcustomers');
+          const res = await fetch('http://localhost:3999/api/admin/getcustomers');
           const data = await res.json();
           if (res.ok) {
             setUsers(data.admins);
@@ -58,7 +58,7 @@ export default function DashUsers() {
     } else if (showRidersOnly) {
       const fetchCustomers = async () => {
         try {
-          const res = await fetch('/api/user/getriders');
+          const res = await fetch('http://localhost:3999/api/admin/getriders');
           const data = await res.json();
           if (res.ok) {
             setUsers(data.admins);
@@ -73,7 +73,7 @@ export default function DashUsers() {
       
       const fetchAllUsers = async () => {
         try {
-          const res = await fetch(`/api/user/getusers?searchTerm=${searchTerm}`);
+          const res = await fetch(`http://localhost:3999/api/admin/getusers?searchTerm=${searchTerm}`);
           const data = await res.json();
           if (res.ok) {
             setUsers(data.users);
@@ -106,7 +106,7 @@ export default function DashUsers() {
   const handleShowMore = async () => {
     const startIndex = users.length;
     try {
-      const res = await fetch(`/api/user/getusers?startIndex=${startIndex}`);
+      const res = await fetch(`http://localhost:3999/api/admin/getusers?startIndex=${startIndex}`);
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data.users]);
@@ -121,7 +121,7 @@ export default function DashUsers() {
 
   const handleDeleteUser = async () => {
     try {
-      const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
+      const res = await fetch(`http://localhost:3999/api/admin/delete/${userIdToDelete}`, {
         method: 'DELETE',
       });
       const data = await res.json();
@@ -220,7 +220,7 @@ export default function DashUsers() {
 
   const handleAssignAdmin = async () => {
     try {
-      const res = await fetch(`/api/user/assignadmin/${userIdToAssignAdmin}`, {
+      const res = await fetch(`http://localhost:4000/api/admin/assignadmin/${userIdToAssignAdmin}`, {
         method: 'PUT',
       });
       const data = await res.json();
@@ -242,7 +242,7 @@ export default function DashUsers() {
 
   const handleResignAdmin = async () => {
     try {
-      const res = await fetch(`/api/user/resignadmin/${userIdToResignAdmin}`, {
+      const res = await fetch(`http://localhost:4000/api/admin/resignadmin/${userIdToResignAdmin}`, {
         method: 'PUT',
       });
       const data = await res.json();

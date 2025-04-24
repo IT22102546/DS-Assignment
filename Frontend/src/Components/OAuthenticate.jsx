@@ -18,7 +18,7 @@ export default function OAuthenticate() {
            const auth = getAuth(app);
             const result = await signInWithPopup(auth , provider);
 
-            const res = await fetch('/api/user/google',{
+            const res = await fetch('http://localhost:4000/api/user/google', {
                 method : 'POST',
                 headers : {
                     'Content-Type':'application/json',
