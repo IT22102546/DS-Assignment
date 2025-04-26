@@ -226,10 +226,7 @@ export default function DashSideBar() {
                   Orders
                 </Sidebar.Item>
               </Link>
-          
-              
             </>
-
 )}
 
 {currentUser?.isTeam &&  (
@@ -262,8 +259,19 @@ export default function DashSideBar() {
 
 )}
 
-
-
+{currentUser?.isRider &&  (
+            <>
+              <Link to='/dashboard?tab=dashDelivery' key="dashDelivery">
+                <Sidebar.Item
+                  active={tab === 'dashDelivery'}
+                  icon={FaEvernote}
+                  as='div'
+                >
+                  Deliveries
+                </Sidebar.Item>
+              </Link>
+            </>
+)}
           <Sidebar.Item 
             icon={HiArrowSmRight} 
             className="cursor-pointer" 
