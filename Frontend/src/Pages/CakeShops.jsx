@@ -19,7 +19,7 @@ export default function CakeShops() {
 
     const fetchShops = async () => {
       try {
-        const res = await fetch('/api/user/getadmins', {
+        const res = await fetch('http://localhost:4003/api/inventory/getshops', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

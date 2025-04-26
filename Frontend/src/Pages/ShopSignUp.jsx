@@ -31,7 +31,7 @@ export default function ShopSignUp() {
         try {
             setLoading(true);
 
-            const res = await fetch("/api/shopreq/shoprequest", {
+            const res = await fetch("http://localhost:4003/api/inventory/shoprequest", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
