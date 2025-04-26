@@ -10,6 +10,7 @@ export default function OAuthenticate() {
     
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const apiUrl = import.meta.env.VITE_User_API_URL;
     const handleGoogleClick = async () =>{
         
        
@@ -18,7 +19,7 @@ export default function OAuthenticate() {
            const auth = getAuth(app);
             const result = await signInWithPopup(auth , provider);
 
-            const res = await fetch('http://localhost:4000/api/user/google', {
+            const res = await fetch(`${apiUrl}/api/user/google`, {
                 method : 'POST',
                 headers : {
                     'Content-Type':'application/json',

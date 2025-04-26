@@ -2,6 +2,7 @@ import ShopRequest from "../models/shopRequest.model.js";
 import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
 import bcryptjs from "bcryptjs";
+import RideRequest from "../models/rideRequest.model.js";
 
 
 
@@ -108,14 +109,14 @@ export const getAdmins = async (req, res, next) => {
 
 export const getCustomers = async (req, res, next) => {
   try {
-    
-    const admins = await User.find({ isAdmin: false });
-    res.status(200).json({ admins });
+    const customers = await User.find({ isAdmin: false, isRider: false });
+    res.status(200).json({ customers });
   } catch (error) {
-    console.error("Error in getAdmins controller:", error);
+    console.error("Error in getCustomers controller:", error);
     res.status(500).json({ status: 500, message: "Internal server error" });
   }
 };
+
 export const assignAdmin = async (req, res, next) =>{
   const { id } = req.params;
   try {
@@ -224,6 +225,93 @@ export const getAllShopRequests = async (req, res) => {
       res.status(200).json({ success: true, data: shopRequests });
   } catch (error) {
       res.status(500).json({ success: false, message: error.message });
+  }
+};
+export const getRiders = async (req, res, next) => {
+  try {
+    
+    const admins = await User.find({ isRider: true });
+    res.status(200).json({ admins });
+  } catch (error) {
+    console.error("Error in getRiders controller:", error);
+    res.status(500).json({ status: 500, message: "Internal server error" });
+  }
+};
+
+
+export const getAllRideRequests = async (req, res) => {
+  try {
+      const rideRequests = await RideRequest.find(); 
+      res.status(200).json({ success: true, data: rideRequests });
+  } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const confirmRiderRequest = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+      const riderRequest = await RideRequest.findById(id);
+
+      if (!riderRequest) {
+          return res.status(404).json({ success: false, message: "Rider request not found." });
+      }
+
+      if (riderRequest.isConfirm) {
+          return res.status(400).json({ success: false, message: "Request already confirmed." });
+      }
+
+      // Hash the password
+        const hashedPassword = bcryptjs.hashSync(riderRequest.password, 10);
+
+    
+      const newUser = new User({
+          username: riderRequest.username,
+          email: riderRequest.email,
+          password: hashedPassword, 
+          adress: riderRequest.address,
+          mobile: riderRequest.mobile,
+          IdNumber: riderRequest.idNumber,
+          age: riderRequest.age,
+          isRider: true,
+      });
+
+      await newUser.save();
+
+      // Mark the rider request as confirmed
+      riderRequest.isConfirm = true;
+      await riderRequest.save();
+
+      res.status(200).json({ success: true, message: "Rider request confirmed." });
+  } catch (error) {
+      console.error("Error confirming rider request:", error);
+      res.status(500).json({ success: false, message: "Server error." });
+  }
+};
+export const rejectRiderRequest = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+      const riderRequest = await RideRequest.findById(id);
+
+      if (!riderRequest) {
+          return res.status(404).json({ success: false, message: "Rider request not found." });
+      }
+
+      if (riderRequest.isReject) {
+          return res.status(400).json({ success: false, message: "Request already rejected." });
+      }
+
+     
+      // Mark the rider request as confirmed
+      riderRequest.isReject = true;
+      await riderRequest.save();
+
+      res.status(200).json({ success: true, message: "Rider request rejected." });
+  } catch (error) {
+      console.error("Error confirming rider request:", error);
+      res.status(500).json({ success: false, message: "Server error." });
   }
 };
 
