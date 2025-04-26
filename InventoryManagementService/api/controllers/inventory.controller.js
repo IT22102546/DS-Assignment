@@ -320,6 +320,17 @@ export const createShopRequest = async (req, res, next) => {
   }
 };
 
+export const getShops = async (req, res, next) => {
+  try {
+    
+    const admins = await User.find({ isAdmin: true });
+    res.status(200).json({ admins });
+  } catch (error) {
+    console.error("Error in getAdmins controller:", error);
+    res.status(500).json({ status: 500, message: "Internal server error" });
+  }
+};
+
 
 
 
