@@ -20,6 +20,4 @@ router.post('/updateResetPassword/:id/:token',updateResetPassword);
 router.get('/:userId', getUser);
 
 
-
-
 export default router;
