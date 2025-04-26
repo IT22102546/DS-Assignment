@@ -1,7 +1,35 @@
 version: '3.8'
 
 services:
-  backend:
+  admin_service:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    container_name: admin_service
+    ports:
+      - "3999:3999"
+    volumes:
+      - ./api:/app
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb+srv://dinithineranjana:dnt123@bakery-shop.ytbrm.mongodb.net/?retryWrites=true&w=majority&appName=Bakery-Shop
+    depends_on:
+      - mongo_admin
+    restart: unless-stopped
+
+  mongo_admin:
+    image: mongo
+    container_name: mongo_admin
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data-admin:/data/db
+    networks:
+      - app-network
+
+  user_service:
     build:
       context: .
       dockerfile: api/Dockerfile
@@ -29,8 +57,8 @@ services:
     networks:
       - app-network
 
-
 volumes:
+  mongo-data-admin:
   mongo-data-user:
 
 networks:
