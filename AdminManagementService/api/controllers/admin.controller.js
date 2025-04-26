@@ -1,5 +1,7 @@
+import ShopRequest from "../models/shopRequest.model.js";
 import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
+import bcryptjs from "bcryptjs";
 
 
 
@@ -145,6 +147,84 @@ export const resignAdmin = async (req, res, next) =>{
     next(error);
   }
   
+};
+
+
+export const confirmShopRequest = async (req, res) => {
+  const { id } = req.params;
+
+  console.log(id);
+
+  try {
+      const shopRequest = await ShopRequest.findById(id);
+
+      if (!shopRequest) {
+          return res.status(404).json({ success: false, message: "Shop request not found." });
+      }
+
+      if (shopRequest.isConfirm) {
+          return res.status(400).json({ success: false, message: "Request already confirmed." });
+      }
+
+
+      const hashedPassword = bcryptjs.hashSync(shopRequest.password, 10);
+
+      console.log("Shop request",shopRequest);
+
+      // Create a new user from the shop request
+      const newUser = new User({
+          username: shopRequest.username,
+          email: shopRequest.email,
+          password: hashedPassword, 
+          adress: shopRequest.address,
+          mobile: shopRequest.mobile,
+          isAdmin: true,
+      });
+
+      await newUser.save();
+
+      shopRequest.isConfirm = true;
+      await shopRequest.save();
+
+      res.status(200).json({ success: true, message: "Shop request confirmed." });
+  } catch (error) {
+      res.status(500).json({ success: false, message: "Server error." });
+  }
+};
+
+
+export const rejectmShopRequest = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+      const shopRequest = await ShopRequest.findById(id);
+
+      if (!shopRequest) {
+          return res.status(404).json({ success: false, message: "Shop request not found." });
+      }
+
+      if (shopRequest.isReject) {
+          return res.status(400).json({ success: false, message: "Request already rejected." });
+      }
+
+
+      shopRequest.isReject = true;
+      await shopRequest.save();
+
+      res.status(200).json({ success: true, message: "Shop request confirmed." });
+  } catch (error) {
+      res.status(500).json({ success: false, message: "Server error." });
+  }
+};
+
+
+export const getAllShopRequests = async (req, res) => {
+  try {
+      const shopRequests = await ShopRequest.find(); 
+      res.status(200).json({ success: true, data: shopRequests });
+  } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+  }
 };
 
 
