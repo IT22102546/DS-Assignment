@@ -63,6 +63,25 @@ services:
       - mongo_user
     restart: unless-stopped
 
+ # Inventory Service
+  inventory_service:
+    build:
+      context: ./InventoryManagementService/api  # Adjust path to the InventoryService API folder
+      dockerfile: Dockerfile
+    container_name: inventory_service
+    ports:
+      - "4003:4003"
+    volumes:
+      - ./InventoryManagementService/api:/app  # Adjust volume mapping based on the file structure
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb+srv://dinithineranjana:dnt123@bakery-shop.ytbrm.mongodb.net/?retryWrites=true&w=majority&appName=Bakery-Shop
+    depends_on:
+      - mongo_inventory
+    restart: unless-stopped
+
   # Mongo Services
   mongo:
     image: mongo:latest
@@ -94,25 +113,8 @@ services:
     networks:
       - app-network
 
-
-  inventory_service:
-    build:
-      context: .
-      dockerfile: api/Dockerfile
-    container_name: inventory_service
-    ports:
-      - "4003:4003"
-    volumes:
-      - ./api:/app
-    networks:
-      - app-network
-    environment:
-      - NODE_ENV=development
-      - MONGO_URI=mongodb+srv://dinithineranjana:dnt123@bakery-shop.ytbrm.mongodb.net/?retryWrites=true&w=majority&appName=Bakery-Shop
-    depends_on:
-      - mongo_user
-    restart: unless-stopped
-
+ 
+  # Mongo Inventory Service
   mongo_inventory:
     image: mongo
     container_name: mongo_inventory
@@ -123,16 +125,14 @@ services:
     networks:
       - app-network
 
-
-
+# Define volumes only once
 volumes:
+  mongo-data:
   mongo-data-admin:
   mongo-data-user:
   mongo-data-inventory:
 
-
 networks:
   app-network:
     driver: bridge
-
 
