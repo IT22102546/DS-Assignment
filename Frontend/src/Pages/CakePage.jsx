@@ -55,7 +55,7 @@ export default function CakePage({ searchTermFromHeader }) {
   const fetchProducts = async () => {
     try {
       const res = await fetch(
-        `/api/cakes/getcakes?searchTerm=${searchTerm}&category=${selectedCategory}&priceRange=${selectedPriceRange}&page=${currentPage}`
+        `http://localhost:4003/api/inventory/getcakes?searchTerm=${searchTerm}&category=${selectedCategory}&priceRange=${selectedPriceRange}&page=${currentPage}`
       );
       const data = await res.json();
       if (res.ok) {

@@ -42,7 +42,7 @@ export default function UpdateCake() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`/api/cakes/getcakes?productId=${productId}`);
+        const res = await fetch(`http://localhost:4003/api/inventory/getcakes?productId=${productId}`);
         const data = await res.json();
         if (!res.ok) {
           setPublishError(data.message);
@@ -120,7 +120,7 @@ export default function UpdateCake() {
     e.preventDefault();
     try {
       const res = await fetch(
-        `/api/cakes/updatecake/${formData._id}/${currentUser._id}`,
+        `http://localhost:4003/api/inventory/updatecake/${formData._id}/${currentUser._id}`,
         {
           method: "PUT",
           headers: {

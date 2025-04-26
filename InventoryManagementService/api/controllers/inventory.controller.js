@@ -4,16 +4,17 @@ import User from '../models/user.model.js';
 
 export const create = async (req, res, next) => {
   try {
-   
     if (!req.body.title || !req.body.description || !req.body.price) {
       return next(errorHandler(400, 'Please provide all required fields'));
     }
+
+    const UserId = req.body.UserId
 
     const slug = req.body.title.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g, '');
     const newCake = new Cake({
       ...req.body,
       slug,
-      userId: req.user.id,
+      UserId
     });
 
     const savedCake = await newCake.save();
@@ -66,7 +67,7 @@ export const getCakes = async (req, res, next) => {
 
 export const updateCake = async (req, res, next) => {
   try {
-   
+    
     if (!req.body.title || !req.body.description || !req.body.price ) {
       return next(errorHandler(400, 'Please provide all required fields'));
     }
@@ -103,7 +104,7 @@ export const deletecake = async (req, res, next) => {
 
 export const featureCake = async (req, res, next) => {
   try {
-   
+    
 
     const updatedCake = await Cake.findByIdAndUpdate(
       req.params.productId,
@@ -149,7 +150,7 @@ export const available = async (req, res, next) => {
 
 export const unavailable = async (req, res, next) => {
   try {
-   
+    
 
     const updatedCake = await Cake.findByIdAndUpdate(
       req.params.productId,
@@ -201,14 +202,20 @@ export const getCakesByCategory = async (req, res, next) => {
 export const admingetCakes = async (req, res, next) => {
   try {
     const { slug, searchTerm, page = 1, limit = 9, category, priceRange } = req.query;
-    const queryOptions = { userId: req.user.id }; 
+    const userId = req.headers["userid"]; // Headers are case-sensitive
+
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
+    const queryOptions = { userId }; // Filter cakes by userId
 
     if (slug) {
       queryOptions.slug = slug;
     }
 
     if (searchTerm) {
-      queryOptions.title = { $regex: searchTerm, $options: 'i' };
+      queryOptions.title = { $regex: searchTerm, $options: "i" };
     }
 
     if (category) {
@@ -216,7 +223,7 @@ export const admingetCakes = async (req, res, next) => {
     }
 
     if (priceRange) {
-      const [minPrice, maxPrice] = priceRange.split('-').map(Number);
+      const [minPrice, maxPrice] = priceRange.split("-").map(Number);
       queryOptions.price = { $gte: minPrice, $lte: maxPrice };
     }
 
@@ -238,6 +245,8 @@ export const admingetCakes = async (req, res, next) => {
 };
 
 
+
+
 export const getCakesByShop = async (req, res) => {
   const { userId } = req.params;
   try {
@@ -253,7 +262,6 @@ export const getUserById = async (req, res) => {
   try {
     const userId = req.params.userId;
     
-    // Find the user by userId
     const user = await User.findById(userId);
     
     if (!user) {
@@ -267,6 +275,8 @@ export const getUserById = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+
 
 
 
