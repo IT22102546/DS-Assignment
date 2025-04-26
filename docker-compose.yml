@@ -135,7 +135,4 @@ networks:
   app-network:
     driver: bridge
 
-volumes:
-  mongo-data:
-  mongo-data-admin:
-  mongo-data-user:
+

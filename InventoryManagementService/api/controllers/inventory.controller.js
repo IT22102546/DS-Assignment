@@ -1,6 +1,7 @@
 import Cake from "../models/cake.model.js";
 import { errorHandler } from "../utils/error.js";
 import User from '../models/user.model.js';
+import ShopRequest from "../models/shopRequest.model.js";
 
 export const create = async (req, res, next) => {
   try {
@@ -273,6 +274,49 @@ export const getUserById = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const createShopRequest = async (req, res, next) => {
+  try {
+      const { username, email, password, mobile, address } = req.body;
+      console.log(username)
+
+      const mobileRegex = /^(071|076|077|075|078|070|074|072)\d{7}$/;
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+.])[A-Za-z\d!@#$%^&*()_+.]{6,9}$/;
+
+      // Validate input fields
+      if (!username || !email || !password || !mobile || !address) {
+          return res.status(400).json({ success: false, message: "All fields are required" });
+      } else if (!mobileRegex.test(mobile)) {
+          return next(errorHandler(400, "Invalid mobile number format"));
+      } else if (!passwordRegex.test(password)) {
+          return next(errorHandler(400, 'Password should be between 6 and 9 characters long and contain at least one uppercase letter, one digit, and one symbol (!@#$%^&*()_+.).'));
+      }else if (username.length < 7 || req.body.username.length > 20) {
+          return next(errorHandler(400, 'ShopName must be between 7 and 20 characters'));}
+  
+
+      
+      const existingUser = await User.findOne({
+          $or: [{ email }, { mobile }],
+      });
+
+      if (existingUser) {
+          if (existingUser.email === email) {
+              return next(errorHandler(400, "Email is already in use by another account"));
+          }
+          if (existingUser.mobile === mobile) {
+              return next(errorHandler(400, "Mobile number is already in use by another account"));
+          }
+      }
+
+     
+      const newRideRequest = new ShopRequest({ username, email, password, mobile, address});
+      await newRideRequest.save();
+
+      res.status(201).json({ success: true, message: "Shop request created successfully" });
+  } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
   }
 };
 
