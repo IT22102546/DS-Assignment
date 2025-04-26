@@ -9,7 +9,7 @@ export default function DashRiderRequests() {
     useEffect(() => {
         const fetchRiderRequests = async () => {
             try {
-                const response = await fetch("/api/shopreq/getshoprequest");
+                const response = await fetch("http://localhost:3999/api/admin/getshoprequest");
                 const data = await response.json();
 
                 if (!data.success) {
@@ -29,7 +29,7 @@ export default function DashRiderRequests() {
 
     const handleConfirm = async (requestId) => {
         try {
-            const response = await fetch(`/api/shopreq/confirmrequest/${requestId}`, {
+            const response = await fetch(`http://localhost:3999/api/admin/confirmrequest/${requestId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
             });
@@ -53,7 +53,7 @@ export default function DashRiderRequests() {
 
     const handleReject = async (requestId) => {
         try {
-            const response = await fetch(`/api/shopreq/rejectrequest/${requestId}`, {
+            const response = await fetch(`http://localhost:3999/api/admin/rejectrequest/${requestId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
             });

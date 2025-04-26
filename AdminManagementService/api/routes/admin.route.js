@@ -1,5 +1,5 @@
 import express  from "express";
-import { assignAdmin,  deleteUser,  getAdmins, getCustomers,  getUsers, resignAdmin } from "../controllers/admin.controller.js";
+import { assignAdmin,  confirmShopRequest,  deleteUser,  getAdmins, getAllShopRequests, getCustomers,  getUsers, rejectmShopRequest, resignAdmin } from "../controllers/admin.controller.js";
 
 
 const router = express.Router();
@@ -9,5 +9,9 @@ router.delete("/delete/:id" , deleteUser);
 router.get('/getusers', getUsers);
 router.put("/assignadmin/:id" ,  assignAdmin);
 router.put("/resignadmin/:id" , resignAdmin);
+router.get("/getshoprequest", getAllShopRequests);
+router.put("/confirmrequest/:id", confirmShopRequest);
+router.put("/rejectrequest/:id", rejectmShopRequest);
+
 
 export default router;
