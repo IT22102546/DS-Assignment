@@ -17,7 +17,13 @@ export default function DashCake() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(`/api/cakes/getadmincakes?searchTerm=${searchTerm}`);
+        const res = await fetch(`http://localhost:4003/api/inventory/getadmincakes?searchTerm=${searchTerm}`, {
+          headers: {
+            'userid': currentUser._id, 
+          },
+        });
+        
+        
         const data = await res.json();
         if (res.ok) {
           setUserProduct(data.products);
@@ -36,7 +42,7 @@ export default function DashCake() {
     setShowModel(false);
     try {
       const res = await fetch(
-        `/api/cakes/deletecake/${productIdToDelete}/${currentUser._id}`,
+        `http://localhost:4003/api/inventory/deletecake/${productIdToDelete}/${currentUser._id}`,
         {
           method: 'DELETE',
         }
@@ -116,7 +122,7 @@ export default function DashCake() {
 
   const handleAssignFeature = async (productId) => {
     try {
-      const res = await fetch(`/api/cakes/featurecake/${productId}/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:4003/api/inventory/featurecake/${productId}/${currentUser._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
       });
@@ -138,7 +144,7 @@ export default function DashCake() {
 
   const handleReassignFeature = async (productId) => {
     try {
-      const res = await fetch(`/api/cakes/unfeaturecake/${productId}/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:4003/api/inventory/unfeaturecake/${productId}/${currentUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -161,7 +167,7 @@ export default function DashCake() {
 
   const handleunavailable = async (productId) => {
     try {
-      const res = await fetch(`/api/cakes/unavailable/${productId}/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:4003/api/inventory/unavailable/${productId}/${currentUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -184,7 +190,7 @@ export default function DashCake() {
 
   const handleAvailable = async (productId) => {
     try {
-      const res = await fetch(`/api/cakes/available/${productId}/${currentUser._id}`, {
+      const res = await fetch(`http://localhost:4003/api/inventory/available/${productId}/${currentUser._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -29,7 +29,7 @@ export default function PostCake() {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/cakes/getcakes?slug=${cakeSlug}`);
+        const res = await fetch(`http://localhost:4003/api/inventory/getcakes?slug=${cakeSlug}`);
         if (!res.ok) throw new Error(await res.text());
 
         const data = await res.json();
@@ -41,7 +41,7 @@ export default function PostCake() {
 
         setProduct(data.products[0]);
         // Fetch similar products
-        const similarRes = await fetch(`/api/cakes/category?category=${data.products[0].category}`);
+        const similarRes = await fetch(`http://localhost:4003/api/inventory/category?category=${data.products[0].category}`);
         const similarData = await similarRes.json();
         setSimilarProducts(similarData.products);
 
