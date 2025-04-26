@@ -7,6 +7,7 @@ import {
   HiBookOpen,
   HiCake,
   HiGift,
+  HiInbox,
   HiNewspaper,
   HiOutlineBookmarkAlt,
   HiOutlineFlag,
@@ -90,6 +91,17 @@ export default function DashSideBar() {
             </Sidebar.Item>
           </Link>
 
+{currentUser?.isRider && (
+  <Link to="/dashboard?tab=dashdelivery" key="dashdelivery">
+  <Sidebar.Item
+    active={tab === "dashdelivery"}
+    icon={HiInbox}
+    as="div"
+  >
+    Deliveries
+  </Sidebar.Item>
+</Link>
+)}
           {currentUser?.isAdmin && currentUser?.isOwner && (
             <>
               <Link to="/dashboard?tab=users" key="users">

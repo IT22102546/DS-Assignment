@@ -61,7 +61,7 @@ export default function DashBoard() {
       {tab == 'eventbooking' && <DashEventBooking/>}
       {tab == 'myeventbookings' && <DashMyEventBooking/>}
       {tab == 'myorders' && <DashMyOrders/>}
-      {tab == 'dashDelivery' && <DashDeliveryPerson/>}
+      {tab == 'dashdelivery' && <DashDeliveryPerson/>}
 
       {/*
 
