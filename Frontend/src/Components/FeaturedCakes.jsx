@@ -29,7 +29,7 @@ export default function FeaturedProducts() {
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
       try {
-        const res = await fetch("/api/cakes/featured");
+        const res = await fetch("http://localhost:4003/api/inventory/featured");
         const data = await res.json();
         if (res.ok) {
           setFeaturedProducts(data);
@@ -49,7 +49,7 @@ export default function FeaturedProducts() {
     const fetchedUsernames = {};
     for (const product of products) {
       try {
-        const res = await fetch(`/api/user/getuserById/${product.userId}`);
+        const res = await fetch(`http://localhost:4003/api/inventory/getshopById/${product.userId}`);
         const data = await res.json();
         if (res.ok) {
           fetchedUsernames[product.userId] = data.username;

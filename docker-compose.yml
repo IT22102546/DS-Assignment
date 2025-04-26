@@ -57,9 +57,40 @@ services:
     networks:
       - app-network
 
+  inventory_service:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    container_name: inventory_service
+    ports:
+      - "4003:4003"
+    volumes:
+      - ./api:/app
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb+srv://dinithineranjana:dnt123@bakery-shop.ytbrm.mongodb.net/?retryWrites=true&w=majority&appName=Bakery-Shop
+    depends_on:
+      - mongo_user
+    restart: unless-stopped
+
+  mongo_inventory:
+    image: mongo
+    container_name: mongo_inventory
+    ports:
+      - "27020:27017"
+    volumes:
+      - mongo-data-inventory:/data/db
+    networks:
+      - app-network
+
+
+
 volumes:
   mongo-data-admin:
   mongo-data-user:
+  mongo-data-inventory:
 
 networks:
   app-network:
