@@ -81,7 +81,38 @@ services:
     depends_on:
       - mongo_inventory
     restart: unless-stopped
+# Delivery Service
+  delivery-service:
+    build:
+      context: ./DeliveryService
+      dockerfile: Dockerfile
+    container_name: delivery_service
+    ports:
+      - "4005:4005"
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - mongo  # Add any dependencies if needed
+    restart: unless-stopped
 
+  # Notification Service
+  notification-service:
+    build:
+      context: ./NotificationService
+      dockerfile: Dockerfile
+    container_name: notification_service
+    ports:
+      - "4006:4006"
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - mongo  # Add any dependencies if needed
+    restart: unless-stopped
+    
   # Mongo Services
   mongo:
     image: mongo:latest
