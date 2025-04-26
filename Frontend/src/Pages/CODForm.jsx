@@ -15,6 +15,7 @@ export default function DeliveryDetails() {
   const navigate = useNavigate();
   const { userId, cartItems, subtotal, deliveryfee, totalcost } =
     location.state || {};
+  const apiUrl = import.meta.env.VITE_ORDER_API_URL;
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -48,7 +49,7 @@ export default function DeliveryDetails() {
     };
 
     try {
-      const response = await fetch("/api/order/create", {
+      const response = await fetch(`${apiUrl}/api/order/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData),
