@@ -11,7 +11,7 @@ export default function DashOrders() {
     const [Orders, setOrders] = useState([]);
     const [showModel, setShowModel] = useState(false);
     const [orderIdToDelete, setOrderIdToDelete] = useState('');
-
+    const apiUrl = import.meta.env.VITE_Inventory_API_URL;
     const [totalOrders, setTotalOrders] = useState(0);
     const [totalSale, setTotalSale] = useState(0);
     const [searchName, setSearchName] = useState('');
@@ -36,7 +36,7 @@ export default function DashOrders() {
             try {
                 if (currentUser) {
                     // Fetch orders where the shop name matches the current user's shop name
-                    const res = await fetch(`/api/order/getorders?storename=${currentUser.username}`);
+                    const res = await fetch(`${apiUrl}/api/inventory/getorders?storename=${currentUser.username}`);
                     if (res.ok) {
                         const data = await res.json();
                         const newOrders = data.map(order => ({
@@ -64,7 +64,7 @@ export default function DashOrders() {
     const handleDeleteOrder = async () => {
         setShowModel(false);
         try {
-            const res = await fetch(`/api/order/deleteorder/${orderIdToDelete}`, {
+            const res = await fetch(`${apiUrl}/api/order/deleteorder/${orderIdToDelete}`, {
                 method: 'DELETE',
             });
             const data = await res.json();

@@ -15,6 +15,7 @@ export default function AllProducts() {
   const user = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
   const [notification, setNotification] = useState({ visible: false, message: '' });
+  const apiUrl = import.meta.env.VITE_Inventory_API_URL;
 
   useEffect(() => {
     if (!shopId) {
@@ -25,7 +26,7 @@ export default function AllProducts() {
 
     const fetchProducts = async () => {
       try {
-        const cakeRes = await fetch(`http://localhost:4003/api/inventory/getcakes`);
+        const cakeRes = await fetch(`${apiUrl}/api/inventory/getcakes`);
         if (!cakeRes.ok) {
           throw new Error("Error fetching cakes");
         }

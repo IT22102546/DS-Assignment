@@ -24,12 +24,13 @@ export default function PostCake() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
+  const apiUrl = import.meta.env.VITE_Inventory_API_URL;
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:4003/api/inventory/getcakes?slug=${cakeSlug}`);
+        const res = await fetch(`${apiUrl}/api/inventory/getcakes?slug=${cakeSlug}`);
         if (!res.ok) throw new Error(await res.text());
 
         const data = await res.json();
@@ -41,7 +42,7 @@ export default function PostCake() {
 
         setProduct(data.products[0]);
         // Fetch similar products
-        const similarRes = await fetch(`http://localhost:4003/api/inventory/category?category=${data.products[0].category}`);
+        const similarRes = await fetch(`${apiUrl}/api/inventory/category?category=${data.products[0].category}`);
         const similarData = await similarRes.json();
         setSimilarProducts(similarData.products);
 

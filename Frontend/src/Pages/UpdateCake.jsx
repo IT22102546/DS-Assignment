@@ -38,11 +38,12 @@ export default function UpdateCake() {
   const { productId } = useParams();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
+  const apiUrl = import.meta.env.VITE_Inventory_API_URL;
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`http://localhost:4003/api/inventory/getcakes?productId=${productId}`);
+        const res = await fetch(`${apiUrl}/api/inventory/getcakes?productId=${productId}`);
         const data = await res.json();
         if (!res.ok) {
           setPublishError(data.message);
@@ -81,7 +82,7 @@ export default function UpdateCake() {
     const fileName = new Date().getTime() + "-" + file.name;
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
-
+    const apiUrl = import.meta.env.VITE_Inventory_API_URL;
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -120,7 +121,7 @@ export default function UpdateCake() {
     e.preventDefault();
     try {
       const res = await fetch(
-        `http://localhost:4003/api/inventory/updatecake/${formData._id}/${currentUser._id}`,
+        `${apiUrl}/api/inventory/updatecake/${formData._id}/${currentUser._id}`,
         {
           method: "PUT",
           headers: {
