@@ -2,6 +2,7 @@ import Cake from "../models/cake.model.js";
 import { errorHandler } from "../utils/error.js";
 import User from '../models/user.model.js';
 import ShopRequest from "../models/shopRequest.model.js";
+import Order from "../models/order.model.js";
 
 export const create = async (req, res, next) => {
   try {
@@ -330,6 +331,102 @@ export const getShops = async (req, res, next) => {
     res.status(500).json({ status: 500, message: "Internal server error" });
   }
 };
+
+export const getAllOrders = async (req, res) => {
+  try {
+      const { storename } = req.query; 
+      const orders = await Order.find({ "productsId.storename": storename }); 
+      res.json(orders);
+  } catch (err) {
+      res.status(500).json({ message: "Error fetching orders", error: err });
+  }
+};
+
+export const getOrder = async (req, res, next) => {
+  try {
+      const orderId = req.params.id;
+      const order = await Order.findById(orderId);
+      
+      if (!order) {
+          return res.status(404).json({ error: 'Order not found' });
+      }
+      
+      res.json(order);    
+
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export const updateOrderStatus = async (req, res, next) => {
+  try {
+      const { orderId } = req.params;
+      const { status, deliveryPerson } = req.body;
+
+      const validStatuses = ['paid', 'preparing', 'handover', 'delivered'];
+      if (!validStatuses.includes(status)) {
+          return next(errorHandler(400, 'Invalid status value'));
+      }
+
+      
+      if (status === 'handover') {
+          if (!deliveryPerson) {
+              return next(errorHandler(400, 'Delivery person is required for handover status'));
+          }
+          
+         
+          const rider = await User.findOne({ _id: deliveryPerson, isRider: true });
+          if (!rider) {
+              return next(errorHandler(400, 'Selected delivery person is not a valid rider'));
+          }
+      }
+
+      const updateData = { status };
+      if (status === 'handover') {
+          updateData.deliveryPerson = deliveryPerson;
+      } else {
+          
+          updateData.$unset = { deliveryPerson: "" };
+      }
+
+      const updatedOrder = await Order.findByIdAndUpdate(
+          orderId,
+          updateData,
+          { new: true }
+      ).populate('deliveryPerson', 'username mobile');
+
+      if (!updatedOrder) {
+          return next(errorHandler(404, 'Order not found'));
+      }
+
+      res.status(200).json(updatedOrder);
+  } catch (error) {
+      next(error);
+  }
+};
+
+export const getRiders = async (req, res, next) => {
+  try {
+    
+    const admins = await User.find({ isRider: true });
+    res.status(200).json({ admins });
+  } catch (error) {
+    console.error("Error in getRiders controller:", error);
+    res.status(500).json({ status: 500, message: "Internal server error" });
+  }
+};
+
+export const HandOvergetRiders = async (req, res, next) => {
+  try {
+      const riders = await User.find({ isRider: true }).select('-password');
+      res.status(200).json(riders);
+  } catch (error) {
+      next(error);
+  }
+};
+
+
 
 
 
