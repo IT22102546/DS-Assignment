@@ -1,4 +1,3 @@
-# Use an official Node.js image as the base
 FROM node:16
 
 # Set the working directory inside the container
