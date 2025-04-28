@@ -2,8 +2,8 @@ services:
   # Order Service
   order-service:
     build:
-      context: ./OrderService  # Adjust path based on your file structure
-      dockerfile: Dockerfile    # Make sure Dockerfile is correctly located in the OrderService folder
+      context: ./OrderService 
+      dockerfile: Dockerfile    
     ports:
       - "4001:4001"
     depends_on:
@@ -15,8 +15,8 @@ services:
   # Payment Service
   payment-service:
     build:
-      context: ./PaymentService  # Adjust path based on your file structure
-      dockerfile: Dockerfile     # Make sure Dockerfile is correctly located in the PaymentService folder
+      context: ./PaymentService  
+      dockerfile: Dockerfile     
     ports:
       - "4002:4002"
     depends_on:
@@ -28,13 +28,13 @@ services:
   # Admin Service
   admin_service:
     build:
-      context: ./AdminManagementService/api  # Adjust path for api inside AdminManagementService
+      context: ./AdminManagementService/api 
       dockerfile: Dockerfile
     container_name: admin_service
     ports:
       - "3999:3999"
     volumes:
-      - ./AdminManagementService/api:/app  # Adjust volume mapping based on the file structure
+      - ./AdminManagementService/api:/app  
     networks:
       - app-network
     environment:
@@ -47,13 +47,13 @@ services:
   # User Service
   user_service:
     build:
-      context: ./UserManagementService/api  # Adjust path for api inside UserManagementService
+      context: ./UserManagementService/api  
       dockerfile: Dockerfile
     container_name: user_service
     ports:
       - "4000:4000"
     volumes:
-      - ./UserManagementService/api:/app  # Adjust volume mapping based on the file structure
+      - ./UserManagementService/api:/app  
     networks:
       - app-network
     environment:
@@ -66,13 +66,13 @@ services:
  # Inventory Service
   inventory_service:
     build:
-      context: ./InventoryManagementService/api  # Adjust path to the InventoryService API folder
+      context: ./InventoryManagementService/api 
       dockerfile: Dockerfile
     container_name: inventory_service
     ports:
       - "4003:4003"
     volumes:
-      - ./InventoryManagementService/api:/app  # Adjust volume mapping based on the file structure
+      - ./InventoryManagementService/api:/app  
     networks:
       - app-network
     environment:
@@ -86,7 +86,7 @@ services:
     build:
       context: ./DeliveryService
       dockerfile: Dockerfile
-    container_name: delivery_service
+    container_name: deliveryservice
     ports:
       - "4005:4005"
     networks:
@@ -94,7 +94,7 @@ services:
     environment:
       - NODE_ENV=production
     depends_on:
-      - mongo  # Add any dependencies if needed
+      - mongo 
     restart: unless-stopped
 
   # Notification Service
@@ -102,7 +102,7 @@ services:
     build:
       context: ./NotificationService
       dockerfile: Dockerfile
-    container_name: notification_service
+    container_name: notificationservice
     ports:
       - "4006:4006"
     networks:
@@ -110,7 +110,7 @@ services:
     environment:
       - NODE_ENV=production
     depends_on:
-      - mongo  # Add any dependencies if needed
+      - mongo  
     restart: unless-stopped
     
   # Mongo Services
