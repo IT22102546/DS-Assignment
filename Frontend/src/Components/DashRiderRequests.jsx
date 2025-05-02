@@ -5,11 +5,12 @@ export default function DashRiderRequests() {
     const [riderRequests, setRiderRequests] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const apiUrl = import.meta.env.VITE_Admin_API_URL;
 
     useEffect(() => {
         const fetchRiderRequests = async () => {
             try {
-                const response = await fetch("/api/ridereq/getriderequest");
+                const response = await fetch(`${apiUrl}/api/admin/getriderequest`);
                 const data = await response.json();
 
                 if (!data.success) {
@@ -29,7 +30,7 @@ export default function DashRiderRequests() {
 
     const handleConfirm = async (requestId) => {
         try {
-            const response = await fetch(`/api/ridereq/confirmrequest/${requestId}`, {
+            const response = await fetch(`${apiUrl}/api/admin/confirmRiderrequest/${requestId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
             });
@@ -53,7 +54,7 @@ export default function DashRiderRequests() {
 
     const handleReject = async (requestId) => {
         try {
-            const response = await fetch(`/api/ridereq/rejectrequest/${requestId}`, {
+            const response = await fetch(`${apiUrl}/api/admin/rejectRiderrequest/${requestId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
             });

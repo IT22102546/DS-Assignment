@@ -38,6 +38,7 @@ export default function DashProfile() {
   const filePickerRef = useRef(null);
   const workImagePickerRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
+  const apiUrl = import.meta.env.VITE_User_API_URL;
 
   const addNewEvent = () => {
     setEvents([...events, { name: '', description: '' }]);
@@ -210,7 +211,7 @@ export default function DashProfile() {
     try {
       dispatch(updateUserStart());
 
-      const res = await fetch(`http://localhost:4000/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`${apiUrl}/api/user/update/${currentUser._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -240,7 +241,7 @@ export default function DashProfile() {
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`${apiUrl}/api/user/delete/${currentUser._id}`, {
         method: "DELETE"
       });
       const data = await res.json();

@@ -1,5 +1,5 @@
 import express from 'express';
-import { create, deletecake, featureCake, getFeaturedCakes, getCakes, getCakesByCategory, unfeatureCake, updateCake, admingetCakes, unavailable, available, getCakesByShop, getUserById, createShopRequest, getShops} from '../controllers/inventory.controller.js';
+import { create, deletecake, featureCake, getFeaturedCakes, getCakes, getCakesByCategory, unfeatureCake, updateCake, admingetCakes, unavailable, available, getCakesByShop, getUserById, createShopRequest, getShops, getAllOrders, getOrder, updateOrderStatus, HandOvergetRiders, getRiders} from '../controllers/inventory.controller.js';
 
 
 const router = express.Router();
@@ -19,6 +19,10 @@ router.get('/getCakesByShop/:userId', getCakesByShop);
 router.get("/getshopById/:userId", getUserById);
 router.post("/shoprequest", createShopRequest);
 router.get('/getshops', getShops);
+router.get('/getorders', getAllOrders);
+router.get('/getorder/:id', getOrder);
+router.put('/update-status/:orderId', updateOrderStatus);
+router.get('/getriders', getRiders);
 
 
 

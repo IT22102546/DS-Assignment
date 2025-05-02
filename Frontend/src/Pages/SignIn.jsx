@@ -14,7 +14,7 @@ export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const apiUrl = import.meta.env.VITE_User_API_URL;
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
     };
@@ -27,7 +27,7 @@ export default function SignIn() {
         try {
             setLoading(true);
             setError(false);
-            const url = isSignUp ? "http://localhost:4000/api/user/signup" : "http://localhost:4000/api/user/signin";
+            const url = isSignUp ? `${apiUrl}/api/user/signup` : `${apiUrl}/api/user/signin`;
             const res = await fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

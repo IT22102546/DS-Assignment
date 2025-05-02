@@ -10,6 +10,7 @@ export default function CakeShops() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
+  const apiUrl = import.meta.env.VITE_Inventory_API_URL;
 
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function CakeShops() {
 
     const fetchShops = async () => {
       try {
-        const res = await fetch('http://localhost:4003/api/inventory/getshops', {
+        const res = await fetch(`${apiUrl}/api/inventory/getshops`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
