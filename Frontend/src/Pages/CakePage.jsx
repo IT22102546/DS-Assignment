@@ -17,7 +17,7 @@ export default function CakePage({ searchTermFromHeader }) {
   const [selectedCategory, setSelectedCategory] = useState(category || '');
   const [selectedPriceRange, setSelectedPriceRange] = useState('');
   const [notification, setNotification] = useState({ visible: false, message: '' });
-  const [showFilters, setShowFilters] = useState(false); // State to toggle filters
+  const [showFilters, setShowFilters] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
 
@@ -69,27 +69,25 @@ export default function CakePage({ searchTermFromHeader }) {
   };
 
   return (
-    <div className="container mx-auto py-6 px-4 bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)]">
+    <div className="container mx-auto py-6 px-4 bg-white">
       {/* Collapsible Filter Section */}
       <div className="mb-6">
-        
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center justify-between px-10 py-3 rounded-lg border border-gray-300 focus:outline-none bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)] text-gray-800 hover:from-[rgba(254,129,128,0.4)] hover:via-[rgba(255,255,255,0.4)] hover:to-[rgba(254,143,142,0.4)] transition-all"
+          className="flex items-center justify-between px-10 py-3 rounded-lg border border-gray-300 focus:outline-none bg-white text-gray-800 hover:bg-gray-50 transition-all"
         >
           <span className="flex items-center">
             <FaFilter className="mr-4" /> Filters
           </span>
-          {showFilters ? <FaChevronUp /> : < FaChevronDown />}
+          {showFilters ? <FaChevronUp /> : <FaChevronDown />}
         </button>
 
-
-        {/* Filter Options (Hidden by Default) */}
+        {/* Filter Options */}
         <div
           className={`mt-2 rounded-lg border border-gray-300 overflow-hidden transition-all duration-300 ${
             showFilters ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
           }`}
-          style={{ background: 'linear-gradient(to bottom, rgba(254,129,128,0.3), rgba(255,255,255,0.3), rgba(254,143,142,0.3))' }}
+          style={{ backgroundColor: 'white' }}
         >
           <div className="p-3 flex flex-col md:flex-row gap-20">
             {/* Search Bar */}
@@ -109,7 +107,7 @@ export default function CakePage({ searchTermFromHeader }) {
             <div className="w-full md:w-auto">
               <h4 className="font-semibold mb-2">Categories</h4>
               <select
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)] text-gray-800"
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none bg-white text-gray-800"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
               >
@@ -126,7 +124,7 @@ export default function CakePage({ searchTermFromHeader }) {
             <div className="w-full md:w-auto">
               <h4 className="font-semibold mb-2">Price Range</h4>
               <select
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)] text-gray-800"
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none bg-white text-gray-800"
                 value={selectedPriceRange}
                 onChange={(e) => setSelectedPriceRange(e.target.value)}
               >
@@ -138,18 +136,16 @@ export default function CakePage({ searchTermFromHeader }) {
                 ))}
               </select>
             </div>
-
           </div>
         </div>
       </div>
-
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-6"> 
         {products.map((product) => (
           <div
             key={product._id}
-            className={`p-4 rounded-lg shadow-lg border border-gray-200 relative flex flex-col justify-between ${
+            className={`p-4 rounded-lg shadow-lg border border-gray-200 relative flex flex-col justify-between bg-white ${
               product.isAvailable ? "" : "opacity-50 cursor-not-allowed"
             }`}
             data-aos="fade-up" data-aos-duration="500"
@@ -164,7 +160,7 @@ export default function CakePage({ searchTermFromHeader }) {
                 className="w-full h-40 sm:h-60 object-cover mb-4 rounded"
               />
             </Link>
-            <h3 className="text-lg font-semibold text-center mb-2 hover:text-pink-600">
+            <h3 className="text-lg font-semibold text-center mb-2 hover:text-green-600">
               <Link to={`/cake/${product.slug}`}>{product.title}</Link>
             </h3>
             <p className="text-center text-gray-600">Price: Rs. {product.price}</p>
@@ -176,7 +172,7 @@ export default function CakePage({ searchTermFromHeader }) {
             </p>
             <div className="flex justify-center mt-4 space-x-2">
               <button
-                className={`bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-700 transition-all ${
+                className={`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-all ${
                   !product.isAvailable ? 'cursor-not-allowed bg-gray-400' : ''
                 }`}
                 onClick={() => handleAddToCart(product)}
@@ -185,12 +181,9 @@ export default function CakePage({ searchTermFromHeader }) {
                 <FaShoppingCart className="inline mr-2" /> Add to Cart
               </button>
             </div>
-
           </div>
         ))}
       </div>
-
-
 
       {notification.visible && (
         <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded shadow-lg transition-all transform scale-110">
