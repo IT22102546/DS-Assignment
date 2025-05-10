@@ -105,7 +105,7 @@ export default function Header() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-4">
+    <div className="bg-gradient-to-r from-green-600 to-green-900 text-white py-4">
       <div className="container mx-auto flex items-center justify-between px-4">
         {/* Logo */}
         <div className="flex items-center">
