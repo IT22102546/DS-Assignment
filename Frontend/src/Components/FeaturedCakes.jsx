@@ -88,7 +88,7 @@ export default function FeaturedProducts() {
     <div className="bg-transparent py-16 w-full">
       <div className="w-full px-6">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-center md:text-left text-pink-800">Signature Cakes</h2>
+          <h2 className="text-3xl font-bold text-center md:text-left text-green-800">Signature Cakes</h2>
           <p className="text-md text-gray-600 max-w-md text-center md:text-left">
             Discover Signature Cakes selected for their outstanding quality and design.
           </p>
@@ -123,7 +123,7 @@ export default function FeaturedProducts() {
                         <h3 className="text-lg font-semibold mb-1 text-black">{product.title}</h3>
                       </Link>
 
-                      <p className="text-lg font-bold text-pink-600">Rs. {product.price}</p>
+                      <p className="text-lg font-bold text-green-600">Rs. {product.price}</p>
 
                       {/* Availability Indicator */}
                       <div className="flex items-center mt-2 text-sm">
@@ -142,7 +142,7 @@ export default function FeaturedProducts() {
                         <button
                           className={`px-3 py-2 rounded text-sm transition-all ${
                             product.isAvailable
-                              ? "bg-pink-500 text-white hover:bg-pink-700"
+                              ? "bg-green-500 text-white hover:bg-green-700"
                               : "bg-gray-300 text-gray-500 cursor-not-allowed"
                           }`}
                           onClick={(e) => handleAddToCart(e, product)}

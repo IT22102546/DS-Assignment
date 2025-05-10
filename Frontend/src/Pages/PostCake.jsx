@@ -95,7 +95,7 @@ export default function PostCake() {
         transition={{ duration: 0.5 }}
       >
         <motion.div
-          className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-pink-500"
+          className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"
           animate={{ rotate: 360 }}
           transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
         ></motion.div>
@@ -118,8 +118,7 @@ export default function PostCake() {
 
   return (
     <motion.div 
-      className="p-3 max-w-auto mx-auto min-h-screen w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)] text-gray-800 placeholder-gray-700"
-      initial={{ opacity: 0 }}
+      className="p-3 max-w-auto mx-auto min-h-screen w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none bg-white"
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
@@ -176,7 +175,7 @@ export default function PostCake() {
                     key={index}
                     className={`flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden cursor-pointer ${
                       index === mainImageIndex
-                        ? "ring-4 ring-pink-400"
+                        ? "ring-4 ring-green-400"
                         : "ring-1 ring-gray-200"
                     }`}
                     onClick={() => setMainImageIndex(index)}
@@ -212,7 +211,7 @@ export default function PostCake() {
         >
           <div className="p-6 rounded-xl shadow-sm">
             <motion.h1
-              className="text-3xl text-pink-300 my-4 font-semibold"
+              className="text-3xl text-green-300 my-4 font-semibold"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.2 }}
@@ -235,7 +234,7 @@ export default function PostCake() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.4 }}
             >
-              <p className="text-pink-500 font-semibold text-xl">
+              <p className="text-green-500 font-semibold text-xl">
                 Rs. {product.price}
               </p>
               <div className="flex items-center border rounded-lg overflow-hidden">
@@ -291,7 +290,7 @@ export default function PostCake() {
             >
               <motion.button
                 onClick={handleAddToCart}
-                className="w-full max-w-md bg-[#FE8180] hover:bg-[#e57373] text-white font-medium py-3 px-6 rounded-lg shadow-md"
+                className="w-full max-w-md bg-[#4ad27a] hover:bg-[#4ba532] text-white font-medium py-3 px-6 rounded-lg shadow-md"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
