@@ -2,6 +2,7 @@ import express from "express";
 import {
   createOrder,
   deleteOrder,
+  FinishOrder,
   getAllOrders,
   getMyOrder,
   getOrder,
@@ -17,7 +18,9 @@ router.post("/create", createOrder);
 router.get("/getorders", getAllOrders);
 router.get("/getorder/:id", getOrder);
 router.delete("/deleteorder/:id", deleteOrder);
-router.put("/update-status/:orderId", updateOrderStatus);
+router.put("/update-status/:orderId", updateOrderStatus );
+router.put("/finish-delivery/:orderId", FinishOrder );
+
 router.get("/customer/:id", getOrdersByCustomerId);
 router.get("/getmyorder/:userId", getMyOrder);
 

@@ -1,4 +1,4 @@
-# Use a minimal Node.js image
+
 FROM node:18-alpine
 
 # Set working directory
@@ -18,11 +18,11 @@ ENV NODE_ENV=production
 ENV PORT=3999
 ENV NODE_OPTIONS="--experimental-vm-modules --es-module-specifier-resolution=node"
 
-# Optional: Add a non-root user for security
+# Add a non-root user for security
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
 
-# Healthcheck (make sure your /health endpoint exists)
+# Healthcheck
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3999/health || exit 1
 

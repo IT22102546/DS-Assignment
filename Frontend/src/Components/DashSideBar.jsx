@@ -7,6 +7,7 @@ import {
   HiBookOpen,
   HiCake,
   HiGift,
+  HiInbox,
   HiNewspaper,
   HiOutlineBookmarkAlt,
   HiOutlineFlag,
@@ -90,6 +91,49 @@ export default function DashSideBar() {
             </Sidebar.Item>
           </Link>
 
+{currentUser?.isRider && (
+<>
+<Link to="/dashboard?tab=dashdelivery" key="dashdelivery">
+  <Sidebar.Item
+    active={tab === "dashdelivery"}
+    icon={HiInbox}
+    as="div"
+  >
+    Orders
+  </Sidebar.Item>
+</Link>
+<Link to="/dashboard?tab=dashAssignedDeliveries" key="dashAssignedDeliveries">
+  <Sidebar.Item
+    active={tab === "dashAssignedDeliveries"}
+    icon={HiInbox}
+    as="div"
+  >
+    Assigned Deliveries
+  </Sidebar.Item>
+</Link>
+
+<Link to="/dashboard?tab=dashInTransmitDeliveries" key="dashInTransmitDeliveries">
+  <Sidebar.Item
+    active={tab === "dashInTransmitDeliveries"}
+    icon={HiInbox}
+    as="div"
+  >
+    Pending Deliveries
+  </Sidebar.Item>
+</Link>
+
+<Link to="/dashboard?tab=dashDeliveredDeliveries" key="dashDeliveredDeliveries">
+  <Sidebar.Item
+    active={tab === "dashDeliveredDeliveries"}
+    icon={HiInbox}
+    as="div"
+  >
+    Delivered Deliveries
+  </Sidebar.Item>
+</Link>
+
+</>
+)}
           {currentUser?.isAdmin && currentUser?.isOwner && (
             <>
               <Link to="/dashboard?tab=users" key="users">

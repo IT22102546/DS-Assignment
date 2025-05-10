@@ -20,6 +20,10 @@ import DashGift from "../Components/DashGift";
 import DashEventBooking from "../Components/DashEventBooking";
 import DashMyEventBooking from "../Components/DashMyEventBookings";
 import DashMyOrders from "../Components/DashMyOrders";
+import DashDeliveryPerson from "../Components/DashDeliveryPerson";
+import DashAssignedDeliveries from "../Components/DashAssignedDeliveries";
+import DashInTransmitDeleveries from "../Components/DashInTransmitDeleveries";
+import DashDeliveredDeliveries from "../Components/DashDeliveredDeliveries";
 
 
 export default function DashBoard() {
@@ -60,6 +64,10 @@ export default function DashBoard() {
       {tab == 'eventbooking' && <DashEventBooking/>}
       {tab == 'myeventbookings' && <DashMyEventBooking/>}
       {tab == 'myorders' && <DashMyOrders/>}
+      {tab == 'dashdelivery' && <DashDeliveryPerson/>}
+      {tab == 'dashAssignedDeliveries' && <DashAssignedDeliveries/>}
+      {tab == 'dashInTransmitDeliveries' && <DashInTransmitDeleveries/>}
+      {tab == 'dashDeliveredDeliveries' && <DashDeliveredDeliveries/>}
 
       {/*
 

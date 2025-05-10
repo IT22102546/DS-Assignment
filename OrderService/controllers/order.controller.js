@@ -2,6 +2,7 @@ import Order from "../models/order.model.js";
 
 import { mongoose } from "mongoose";
 import { errorHandler } from "../utils/error.js";
+import User from "../models/user.model.js";
 //import User from "../models/user.model.js";
 
 //test order
@@ -206,6 +207,56 @@ export const updateOrderStatus = async (req, res, next) => {
     next(error);
   }
 };
+
+
+
+export const FinishOrder = async (req, res, next) => {
+  try {
+    const { orderId } = req.params;
+    const { status, deliveryPerson } = req.body;
+
+    const validStatuses = ["paid", "preparing", "handover", "delivered"];
+    if (!validStatuses.includes(status)) {
+      return next(errorHandler(400, "Invalid status value"));
+    }
+
+    if (status === "handover") {
+      if (!deliveryPerson) {
+        return next(
+          errorHandler(400, "Delivery person is required for handover status")
+        );
+      }
+
+      const rider = await User.findOne({ _id: deliveryPerson, isRider: true });
+      if (!rider) {
+        return next(
+          errorHandler(400, "Selected delivery person is not a valid rider")
+        );
+      }
+    }
+
+    const updateData = { status };
+    if (status === "delivered") {
+      updateData.deliveryPerson = deliveryPerson;
+    } else {
+      updateData.$unset = { deliveryPerson: "" };
+    }
+
+    const updatedOrder = await Order.findByIdAndUpdate(orderId, updateData, {
+      new: true,
+    }).populate("deliveryPerson", "username mobile");
+
+    if (!updatedOrder) {
+      return next(errorHandler(404, "Order not found"));
+    }
+
+    res.status(200).json(updatedOrder);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 
 export const getOrdersByCustomerId = async (req, res, next) => {
   try {
