@@ -2,7 +2,6 @@ import React from 'react';
 import FeaturedCakes from '../Components/FeaturedCakes';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel CSS
-import SweetItems from '../Components/SweetItems';
 import banner1 from '../assets/banner1.jpg';
 import banner2 from '../assets/banner2.png';
 import banner3 from '../assets/banner3.png';
@@ -73,7 +72,7 @@ export default function Home() {
 
       {/* Featured Cakes Section */}
       <FeaturedCakes />
-      <SweetItems />
+     
     </div>
   );
 }

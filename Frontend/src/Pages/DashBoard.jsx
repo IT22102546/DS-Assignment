@@ -5,20 +5,12 @@ import DashProfile from "../Components/DashProfile";
 import DashUsers from "../Components/DashUsers";
 import DashCake from "../Components/DashCakes";
 import DashOrders from "../Components/DashOrders";
-import DashSweets from "../Components/DashSweets";
 import DashRiderRequests from "../Components/DashRiderRequests";
 import DashShopRequests from "../Components/DashShopRequests";
 import DashBookings from "../Components/DashBookings";
 import DashMyBookings from "../Components/DashMyBookings";
 import DashDesign from "../Components/DashDesign";
 import MyDesignReq from "../Components/MyDesignReq";
-import DashBlogs from "../Components/DashBlogs";
-import DashTeamRequests from "../Components/DashTeamRequest";
-import DashEvents from "../Components/DashEvents";
-import DashNature from "../Components/DashNature";
-import DashGift from "../Components/DashGift";
-import DashEventBooking from "../Components/DashEventBooking";
-import DashMyEventBooking from "../Components/DashMyEventBookings";
 import DashMyOrders from "../Components/DashMyOrders";
 import DashDeliveryPerson from "../Components/DashDeliveryPerson";
 import DashAssignedDeliveries from "../Components/DashAssignedDeliveries";
@@ -48,21 +40,12 @@ export default function DashBoard() {
       {tab === 'users' && <DashUsers/>}
       {tab === 'cakes' && <DashCake/>}
       {tab == 'orders' && <DashOrders/>}
-      {tab == 'sweets' && <DashSweets/>}
       {tab == 'riderreq' && <DashRiderRequests/>}
       {tab == 'shopreq' && <DashShopRequests/>}
-      {tab == 'teamreq' && <DashTeamRequests/>}
       {tab == 'bookings' && <DashBookings/>}
       {tab == 'mybookings' && <DashMyBookings/>}
       {tab == 'designs' && <DashDesign/>}
       {tab == 'mydesignreq' && <MyDesignReq/>}
-      {tab == 'blogs' && <DashBlogs/>}
-      {tab == 'blogs' && <DashBlogs/>}
-      {tab == 'events' && <DashEvents/>}
-      {tab == 'nature' && <DashNature/>}
-      {tab == 'gift' && <DashGift/>}
-      {tab == 'eventbooking' && <DashEventBooking/>}
-      {tab == 'myeventbookings' && <DashMyEventBooking/>}
       {tab == 'myorders' && <DashMyOrders/>}
       {tab == 'dashdelivery' && <DashDeliveryPerson/>}
       {tab == 'dashAssignedDeliveries' && <DashAssignedDeliveries/>}

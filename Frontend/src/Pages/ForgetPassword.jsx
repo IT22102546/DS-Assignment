@@ -53,10 +53,10 @@ export default function ForgetPassword() {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)] text-gray-800 placeholder-gray-700">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none bg-gradient-to-b from-[rgba(144,238,144,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(152,251,152,0.3)] text-gray-800 placeholder-gray-700">
       {/* Animated Background */}
       <motion.div
-        className="absolute top-0 left-0 w-1/2 h-full rounded-r-full transition-all bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)]"
+        className="absolute top-0 left-0 w-1/2 h-full rounded-r-full transition-all bg-gradient-to-b from-[rgba(144,238,144,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(152,251,152,0.3)]"
         animate={{
           x: ["0%", "100%"],
           borderRadius: ["0%", "50% 0 0 50%"],
@@ -65,7 +65,7 @@ export default function ForgetPassword() {
       />
 
       {/* Form Container */}
-      <div className="relative w-full max-w-lg px-4 py-100xl border border-gray-300 focus:outline-none bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)] text-gray-800 placeholder-gray-700 p-8 rounded-3xl shadow-lg z-10">
+      <div className="relative w-full max-w-lg px-4 py-100xl border border-gray-300 focus:outline-none bg-gradient-to-b from-[rgba(144,238,144,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(152,251,152,0.3)] text-gray-800 placeholder-gray-700 p-8 rounded-3xl shadow-lg z-10">
         <p className="text-center text-2xl font-cinzel font-semibold">
           Reset Password
         </p>
@@ -81,11 +81,11 @@ export default function ForgetPassword() {
             />
           </div>
           <Button
-            className="max-w-md w-1/2 bg-[#FE8180] hover:bg-[#e57373] mx-auto flex items-center justify-center"
+            className="max-w-md w-1/2 bg-[#4CAF50] hover:bg-[#45a049] mx-auto flex items-center justify-center"
             type="submit"
             disabled={loading}
           >
-            {loading ? <Spinner size="sm" /> : "Send Rest Link"}
+            {loading ? <Spinner size="sm" /> : "Send Reset Link"}
           </Button>
         </form>
 
@@ -102,7 +102,7 @@ export default function ForgetPassword() {
 
         <div className="flex gap-2 text-sm mt-5 pl-5">
           <span>Remembered your password?</span>
-          <Link to="/sign-in" className="text-[#FE8180] hover:underline">
+          <Link to="/sign-in" className="text-[#4CAF50] hover:underline">
             Sign In
           </Link>
         </div>

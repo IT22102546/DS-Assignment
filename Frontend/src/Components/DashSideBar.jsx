@@ -166,25 +166,7 @@ export default function DashSideBar() {
                 </Sidebar.Item>
               </Link>
 
-              <Link to="/dashboard?tab=teamreq" key="teamreq">
-                <Sidebar.Item
-                  active={tab === "teamreq"}
-                  icon={HiOutlineTerminal}
-                  as="div"
-                >
-                  Sup.Team Requests
-                </Sidebar.Item>
-              </Link>
-
-              <Link to="/dashboard?tab=blogs" key="blogs">
-                <Sidebar.Item
-                  active={tab === "blogs"}
-                  icon={HiNewspaper}
-                  as="div"
-                >
-                  Blogs
-                </Sidebar.Item>
-              </Link>
+              
             </>
           )}
 
@@ -195,20 +177,8 @@ export default function DashSideBar() {
                   Cakes
                 </Sidebar.Item>
               </Link>
-              <Link to="/dashboard?tab=nature" key="nature">
-                <Sidebar.Item
-                  active={tab === "nature"}
-                  icon={HiOutlineFlag}
-                  as="div"
-                >
-                  Nature Products
-                </Sidebar.Item>
-              </Link>
-              <Link to="/dashboard?tab=gift" key="gift">
-                <Sidebar.Item active={tab === "gift"} icon={HiGift} as="div">
-                  Gift Boxes
-                </Sidebar.Item>
-              </Link>
+             
+              
 
               <Link to="/dashboard?tab=designs" key="designs">
                 <Sidebar.Item
@@ -230,11 +200,6 @@ export default function DashSideBar() {
                 </Sidebar.Item>
               </Link>
 
-              <Link to="/dashboard?tab=sweets" key="sweets">
-                <Sidebar.Item active={tab === "cakes"} icon={FaGift} as="div">
-                  Sweets
-                </Sidebar.Item>
-              </Link>
 
               <Link to="/dashboard?tab=orders" key="orders">
                 <Sidebar.Item
@@ -248,29 +213,7 @@ export default function DashSideBar() {
             </>
           )}
 
-          {currentUser?.isTeam && (
-            <>
-              <Link to="/dashboard?tab=events" key="events">
-                <Sidebar.Item
-                  active={tab === "events"}
-                  icon={FaEvernote}
-                  as="div"
-                >
-                  Events
-                </Sidebar.Item>
-              </Link>
-              <Link to="/dashboard?tab=eventbooking" key="eventbooking">
-                <Sidebar.Item
-                  active={tab === "events"}
-                  icon={FaPersonBooth}
-                  as="div"
-                >
-                  Event Bookings
-                </Sidebar.Item>
-              </Link>
-            </>
-          )}
-
+         
           <Sidebar.Item
             icon={HiArrowSmRight}
             className="cursor-pointer"
