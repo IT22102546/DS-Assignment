@@ -51,7 +51,7 @@ export default function DeliverySignUp() {
             toast.success("Request sent successfully! We will update you soon.");
             setTimeout(() => {
                 navigate("/");
-            }, 2000); // Redirect after 2 seconds
+            }, 2000);
         } catch (error) {
             setLoading(false);
             toast.error(`Error: ${error.message}`);
@@ -63,7 +63,7 @@ export default function DeliverySignUp() {
     };
 
     return (
-        <div className="flex items-center justify-center bg-gradient-to-b p-6 from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)] min-h-screen">
+        <div className="flex items-center justify-center bg-white p-6 min-h-screen">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -71,7 +71,7 @@ export default function DeliverySignUp() {
                 className="w-full max-w-2xl"  
             >
                 <motion.div
-                    className=" rounded-3xl shadow-2xl overflow-hidden"
+                    className="rounded-3xl shadow-2xl overflow-hidden bg-white"
                     whileHover={{ scale: 1.005 }}
                     transition={{ duration: 0.3 }}
                 >
@@ -82,13 +82,12 @@ export default function DeliverySignUp() {
                             transition={{ delay: 0.2 }}
                             className="text-center mb-8"
                         >
-                            <h2 className="text-3xl font-bold text-pink-800">Join Our Delivery Team</h2>
-                            <p className="text-pink-600 mt-2">Fill in your details to get started</p>
+                            <h2 className="text-3xl font-bold text-green-800">Join Our Delivery Team</h2>
+                            <p className="text-green-600 mt-2">Fill in your details to get started</p>
                         </motion.div>
 
                         <form onSubmit={handleSubmit}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                {/* Field pairs - two per row */}
                                 <motion.div
                                     initial={{ opacity: 0, x: -20 }}
                                     animate={{ opacity: 1, x: 0 }}
@@ -180,7 +179,6 @@ export default function DeliverySignUp() {
                                 </motion.div>
                             </div>
 
-                            {/* Password Field (full width) */}
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -216,7 +214,7 @@ export default function DeliverySignUp() {
                                 <Button
                                     disabled={loading}
                                     type="submit"
-                                    className="max-w-md w-3/4 bg-[#FE8180] hover:bg-[#e57373] mx-auto flex items-center justify-center"
+                                    className="max-w-md w-3/4 bg-[#4CAF50] hover:bg-[#45a049] mx-auto flex items-center justify-center"
                                 >
                                     {loading ? (
                                         <div className="flex items-center justify-center">
@@ -237,7 +235,7 @@ export default function DeliverySignUp() {
                             className="text-center mt-6 text-sm text-gray-600"
                         >
                             Already have an account?{" "}
-                            <Link to="/sign-in" className="text-[#FE8180] hover:underline font-medium">
+                            <Link to="/sign-in" className="text-[#4CAF50] hover:underline font-medium">
                                 Sign in
                             </Link>
                         </motion.div>
