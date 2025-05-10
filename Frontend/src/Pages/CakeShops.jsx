@@ -68,8 +68,8 @@ export default function CakeShops() {
   }
 
   return (
-    <div className="p-6 bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)] min-h-screen">
-      <h1 className="text-4xl font-bold text-center mb-12 text-pink-800">Available Cake Shops</h1>
+    <div className="p-6 bg-white min-h-screen">
+      <h1 className="text-4xl font-bold text-center mb-12 text-green-800">Available Cake Shops</h1>
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {shops.map((shop, index) => (
           <div
@@ -82,9 +82,9 @@ export default function CakeShops() {
             <img
               src={shop.profilePicture || 'https://via.placeholder.com/150'}
               alt={`${shop.username}'s shop`}
-              className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-pink-300"
+              className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-green-300"
             />
-            <h3 className="text-xl font-semibold text-pink-800">{shop.username}</h3>
+            <h3 className="text-xl font-semibold text-green-800">{shop.username}</h3>
             <p className="text-gray-500">{shop.adress || 'Address not provided'}</p>
           </div>
         ))}
