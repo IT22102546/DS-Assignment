@@ -17,40 +17,38 @@ import DashAssignedDeliveries from "../Components/DashAssignedDeliveries";
 import DashInTransmitDeleveries from "../Components/DashInTransmitDeleveries";
 import DashDeliveredDeliveries from "../Components/DashDeliveredDeliveries";
 
-
 export default function DashBoard() {
   const location = useLocation();
-  const[tab,setTab]= useState();
+  const [tab, setTab] = useState();
 
-  useEffect(()=>{
+  useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const tabFromUrl = urlParams.get('tab');
-    if(tabFromUrl){
-      setTab(tabFromUrl)
+    const tabFromUrl = urlParams.get("tab");
+    if (tabFromUrl) {
+      setTab(tabFromUrl);
     }
-  },[location.search]);
-  
+  }, [location.search]);
+
   return (
-    <div className="min-h-screen flex flex-col md:flex-row w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)] text-gray-800 placeholder-gray-700"
->
-      <div className="md:w-56" >
-        <DashSideBar/>
+    <div className="min-h-screen flex flex-col md:flex-row w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none ">
+      <div className="md:w-56">
+        <DashSideBar />
       </div>
-      {tab==='profile' && <DashProfile/>}
-      {tab === 'users' && <DashUsers/>}
-      {tab === 'cakes' && <DashCake/>}
-      {tab == 'orders' && <DashOrders/>}
-      {tab == 'riderreq' && <DashRiderRequests/>}
-      {tab == 'shopreq' && <DashShopRequests/>}
-      {tab == 'bookings' && <DashBookings/>}
-      {tab == 'mybookings' && <DashMyBookings/>}
-      {tab == 'designs' && <DashDesign/>}
-      {tab == 'mydesignreq' && <MyDesignReq/>}
-      {tab == 'myorders' && <DashMyOrders/>}
-      {tab == 'dashdelivery' && <DashDeliveryPerson/>}
-      {tab == 'dashAssignedDeliveries' && <DashAssignedDeliveries/>}
-      {tab == 'dashInTransmitDeliveries' && <DashInTransmitDeleveries/>}
-      {tab == 'dashDeliveredDeliveries' && <DashDeliveredDeliveries/>}
+      {tab === "profile" && <DashProfile />}
+      {tab === "users" && <DashUsers />}
+      {tab === "cakes" && <DashCake />}
+      {tab == "orders" && <DashOrders />}
+      {tab == "riderreq" && <DashRiderRequests />}
+      {tab == "shopreq" && <DashShopRequests />}
+      {tab == "bookings" && <DashBookings />}
+      {tab == "mybookings" && <DashMyBookings />}
+      {tab == "designs" && <DashDesign />}
+      {tab == "mydesignreq" && <MyDesignReq />}
+      {tab == "myorders" && <DashMyOrders />}
+      {tab == "dashdelivery" && <DashDeliveryPerson />}
+      {tab == "dashAssignedDeliveries" && <DashAssignedDeliveries />}
+      {tab == "dashInTransmitDeliveries" && <DashInTransmitDeleveries />}
+      {tab == "dashDeliveredDeliveries" && <DashDeliveredDeliveries />}
 
       {/*
 
@@ -63,17 +61,12 @@ export default function DashBoard() {
         
       
       */}
-      
-      
 
       {/*
      
       {tab === 'myorders' && <DashMyOrders/>}
 
        */}
-
-   
-     
     </div>
-  )
+  );
 }
