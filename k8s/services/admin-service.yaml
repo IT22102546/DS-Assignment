@@ -1,0 +1,12 @@
+# admin-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-service
+spec:
+  selector:
+    app: admin-service
+  ports:
+    - protocol: TCP
+      port: 3999
+      targetPort: 3999

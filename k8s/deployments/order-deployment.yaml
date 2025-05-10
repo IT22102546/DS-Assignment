@@ -1,0 +1,28 @@
+# k8s/deployments/order-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  namespace: bakery-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+      spec:
+      containers:
+      - name: order-service
+        image: order-service:latest
+        ports:
+        - containerPort: 32709
+        env:
+        - name: PORT
+          value: "32709"
+        - name: NODE_ENV
+          value: "development"
+        - name: ALLOWED_ORIGINS
+          value: "http://localhost:8080,http://localhost,http://frontend"

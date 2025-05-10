@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-service
+  namespace: bakery-shop
+spec:
+  type: NodePort  # <- Critical addition
+  selector:
+    app: inventory-service
+  ports:
+    - protocol: TCP
+      port: 4003       # Internal cluster port
+      targetPort: 4003 # Matches containerPort
+      nodePort: 31587  # Must match VITE_Inventory_API_URL

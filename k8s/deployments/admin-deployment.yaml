@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-service
+  namespace: bakery-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin-service
+  template:
+    metadata:
+      labels:
+        app: admin-service
+    spec:
+      containers:
+      - name: admin-service
+        image: admin-service:latest
+        ports:
+        - containerPort: 3999
+        env:
+        - name: PORT
+          value: "3999"
+        - name: NODE_ENV
+          value: "development"
+        - name: ALLOWED_ORIGINS
+          value: "http://localhost:8080,http://localhost,http://frontend"

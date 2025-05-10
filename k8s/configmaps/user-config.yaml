@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-config
+  namespace: bakery-shop
+data:
+  NODE_ENV: "development"
+  MONGO_URI: "mongodb+srv://dinithineranjana:dnt123@bakery-shop.ytbrm.mongodb.net/?retryWrites=true&w=majority&appName=Bakery-Shop"

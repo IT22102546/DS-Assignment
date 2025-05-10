@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo-admin
+  namespace: bakery-shop
+spec:
+  serviceName: mongo-admin
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-admin
+  template:
+    metadata:
+      labels:
+        app: mongo-admin
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:latest
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongo-data-admin
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-data-admin
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-admin
+  namespace: bakery-shop
+spec:
+  selector:
+    app: mongo-admin
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017

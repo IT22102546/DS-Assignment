@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-service
+  namespace: bakery-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-service
+  template:
+    metadata:
+      labels:
+        app: inventory-service
+    spec:
+      containers:
+      - name: inventory-service
+        image: inventory-service:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 4003
+        env:
+        - name: MONGO_URI
+          value: "mongodb://mongo-inventory:27017/inventory_db"
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"

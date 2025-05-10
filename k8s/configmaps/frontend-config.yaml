@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  namespace: bakery-shop
+data:
+  VITE_FIREBASE_API_KEY: "AIzaSyBgZYbxQAL7vlonCoHgmONJti7W5mCLm88"
+  VITE_PAYMENT_API_URL: "http://payment-service.bakery-shop.svc.cluster.local:4002"
+  VITE_ORDER_API_URL: "http://order-service.bakery-shop.svc.cluster.local:4001"
+  VITE_User_API_URL: "http://user-service.bakery-shop.svc.cluster.local:4000"
+  VITE_Inventory_API_URL: "http://inventory-service.bakery-shop.svc.cluster.local:4003"
+  VITE_Admin_API_URL: "http://admin-service.bakery-shop.svc.cluster.local:3999"

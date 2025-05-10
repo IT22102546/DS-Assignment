@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo-inventory
+  namespace: bakery-shop
+spec:
+  serviceName: mongo-inventory
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-inventory
+  template:
+    metadata:
+      labels:
+        app: mongo-inventory
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:latest
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongo-data-inventory
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-data-inventory
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-inventory
+  namespace: bakery-shop
+spec:
+  selector:
+    app: mongo-inventory
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017

@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 
-//routes import
+
 import orderRoute from "./routes/order.route.js";
 
 dotenv.config();
@@ -27,11 +27,29 @@ app.listen(4001, () => {
   console.log("Server is Running on Port 4001");
 });
 
+const allowedOrigins = [
+  'http://localhost:8080',
+  'http://localhost',
+  'http://frontend',
+  'http://frontend.bakery-shop'
+];
+
 const corsOptions = {
-  origin: "http://localhost:5173",
-  credentials: true,
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 };
+
 app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions));
 
 //api call
 app.use("/api/order", orderRoute);

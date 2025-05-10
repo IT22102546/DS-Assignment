@@ -28,13 +28,13 @@ services:
   # Admin Service
   admin_service:
     build:
-      context: ./AdminManagementService/api  # Adjust path for api inside AdminManagementService
+      context: ./AdminManagementService/api  
       dockerfile: Dockerfile
     container_name: admin_service
     ports:
       - "3999:3999"
     volumes:
-      - ./AdminManagementService/api:/app  # Adjust volume mapping based on the file structure
+      - ./AdminManagementService/api:/app  
     networks:
       - app-network
     environment:
@@ -47,13 +47,13 @@ services:
   # User Service
   user_service:
     build:
-      context: ./UserManagementService/api  # Adjust path for api inside UserManagementService
+      context: ./UserManagementService/api  
       dockerfile: Dockerfile
     container_name: user_service
     ports:
       - "4000:4000"
     volumes:
-      - ./UserManagementService/api:/app  # Adjust volume mapping based on the file structure
+      - ./UserManagementService/api:/app 
     networks:
       - app-network
     environment:
@@ -66,13 +66,13 @@ services:
  # Inventory Service
   inventory_service:
     build:
-      context: ./InventoryManagementService/api  # Adjust path to the InventoryService API folder
+      context: ./InventoryManagementService/api  
       dockerfile: Dockerfile
     container_name: inventory_service
     ports:
       - "4003:4003"
     volumes:
-      - ./InventoryManagementService/api:/app  # Adjust volume mapping based on the file structure
+      - ./InventoryManagementService/api:/app  
     networks:
       - app-network
     environment:
