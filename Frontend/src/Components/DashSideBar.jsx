@@ -6,6 +6,7 @@ import {
   HiBookmark,
   HiBookOpen,
   HiCake,
+  HiColorSwatch,
   HiGift,
   HiInbox,
   HiNewspaper,
@@ -91,49 +92,59 @@ export default function DashSideBar() {
             </Sidebar.Item>
           </Link>
 
-{currentUser?.isRider && (
-<>
-<Link to="/dashboard?tab=dashdelivery" key="dashdelivery">
-  <Sidebar.Item
-    active={tab === "dashdelivery"}
-    icon={HiInbox}
-    as="div"
-  >
-    Orders
-  </Sidebar.Item>
-</Link>
-<Link to="/dashboard?tab=dashAssignedDeliveries" key="dashAssignedDeliveries">
-  <Sidebar.Item
-    active={tab === "dashAssignedDeliveries"}
-    icon={HiInbox}
-    as="div"
-  >
-    Assigned Deliveries
-  </Sidebar.Item>
-</Link>
+          {currentUser?.isRider && (
+            <>
+              <Link to="/dashboard?tab=dashdelivery" key="dashdelivery">
+                <Sidebar.Item
+                  active={tab === "dashdelivery"}
+                  icon={HiInbox}
+                  as="div"
+                >
+                  Orders
+                </Sidebar.Item>
+              </Link>
+              <Link
+                to="/dashboard?tab=dashAssignedDeliveries"
+                key="dashAssignedDeliveries"
+              >
+                <Sidebar.Item
+                  active={tab === "dashAssignedDeliveries"}
+                  icon={HiInbox}
+                  as="div"
+                >
+                  Assigned Deliveries
+                </Sidebar.Item>
+              </Link>
 
-<Link to="/dashboard?tab=dashInTransmitDeliveries" key="dashInTransmitDeliveries">
-  <Sidebar.Item
-    active={tab === "dashInTransmitDeliveries"}
-    icon={HiInbox}
-    as="div"
-  >
-    Pending Deliveries
-  </Sidebar.Item>
-</Link>
+              <Link
+                to="/dashboard?tab=dashInTransmitDeliveries"
+                key="dashInTransmitDeliveries"
+              >
+                <Sidebar.Item
+                  active={tab === "dashInTransmitDeliveries"}
+                  icon={HiInbox}
+                  as="div"
+                >
+                  Pending Deliveries
+                </Sidebar.Item>
+              </Link>
 
-<Link to="/dashboard?tab=dashDeliveredDeliveries" key="dashDeliveredDeliveries">
-  <Sidebar.Item
-    active={tab === "dashDeliveredDeliveries"}
-    icon={HiInbox}
-    as="div"
-  >
-    Delivered Deliveries
-  </Sidebar.Item>
-</Link>
-
-</>
-)}
+              <Link
+                to="/dashboard?tab=dashDeliveredDeliveries"
+                key="dashDeliveredDeliveries"
+              >
+                <Sidebar.Item
+                  active={tab === "dashDeliveredDeliveries"}
+                  icon={HiInbox}
+                  as="div"
+                >
+                  Delivered Deliveries
+                </Sidebar.Item>
+              </Link>
+            </>
+          )}
+          <hr />
+          <h1 className="text-[10px]">ADMIN</h1>
           {currentUser?.isAdmin && currentUser?.isOwner && (
             <>
               <Link to="/dashboard?tab=users" key="users">
@@ -165,8 +176,6 @@ export default function DashSideBar() {
                   Shop Requests
                 </Sidebar.Item>
               </Link>
-
-              
             </>
           )}
 
@@ -177,29 +186,6 @@ export default function DashSideBar() {
                   Cakes
                 </Sidebar.Item>
               </Link>
-             
-              
-
-              <Link to="/dashboard?tab=designs" key="designs">
-                <Sidebar.Item
-                  active={tab === "designs"}
-                  icon={FaDelicious}
-                  as="div"
-                >
-                  Requested Designs
-                </Sidebar.Item>
-              </Link>
-
-              <Link to="/dashboard?tab=bookings" key="bookings">
-                <Sidebar.Item
-                  active={tab === "bookings"}
-                  icon={HiBookOpen}
-                  as="div"
-                >
-                  Bookings
-                </Sidebar.Item>
-              </Link>
-
 
               <Link to="/dashboard?tab=orders" key="orders">
                 <Sidebar.Item
@@ -210,10 +196,60 @@ export default function DashSideBar() {
                   Orders
                 </Sidebar.Item>
               </Link>
+
+              <hr />
+              <h1 className="text-[10px]">Rider</h1>
+              <Link to="/dashboard?tab=dashdelivery" key="dashdelivery">
+                <Sidebar.Item
+                  active={tab === "dashdelivery"}
+                  icon={HiInbox}
+                  as="div"
+                >
+                  Orders to deliver
+                </Sidebar.Item>
+              </Link>
+
+              <Link
+                to="/dashboard?tab=dashAssignedDeliveries"
+                key="dashAssignedDeliveries"
+              >
+                <Sidebar.Item
+                  active={tab === "dashAssignedDeliveries"}
+                  icon={HiBookmark}
+                  as="div"
+                >
+                  Assigned Deliveries
+                </Sidebar.Item>
+              </Link>
+
+              <Link
+                to="/dashboard?tab=dashInTransmitDeliveries"
+                key="dashInTransmitDeliveries"
+              >
+                <Sidebar.Item
+                  active={tab === "dashInTransmitDeliveries"}
+                  icon={HiColorSwatch}
+                  as="div"
+                >
+                  Pending Deliveries
+                </Sidebar.Item>
+              </Link>
+
+              <Link
+                to="/dashboard?tab=dashDeliveredDeliveries"
+                key="dashDeliveredDeliveries"
+              >
+                <Sidebar.Item
+                  active={tab === "dashDeliveredDeliveries"}
+                  icon={HiGift}
+                  as="div"
+                >
+                  Delivered
+                </Sidebar.Item>
+              </Link>
             </>
           )}
 
-         
           <Sidebar.Item
             icon={HiArrowSmRight}
             className="cursor-pointer"

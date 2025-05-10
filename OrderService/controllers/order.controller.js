@@ -169,6 +169,16 @@ export const updateOrder = async (req, res, next) => {
   }
 };
 
+export const getAllOrderShop = async (req, res) => {
+  try {
+    const { storename } = req.query;
+    const orders = await Order.find({ "productsId.storename": storename });
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching orders", error: err });
+  }
+};
+
 //delete order
 export const deleteOrder = async (req, res, next) => {
   let orderId = req.params.id;

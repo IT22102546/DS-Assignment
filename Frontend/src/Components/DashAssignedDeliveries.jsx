@@ -1,9 +1,6 @@
-
-
-
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const DashAssignedDeliveries = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -15,11 +12,8 @@ const DashAssignedDeliveries = () => {
   useEffect(() => {
     if (!currentUser) return;
 
- 
-
     fetchDeliveries();
   }, [currentUser]);
-
 
   const fetchDeliveries = async () => {
     try {
@@ -30,7 +24,7 @@ const DashAssignedDeliveries = () => {
         throw new Error("Failed to fetch assigned deliveries");
       }
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       setDeliveries(data);
     } catch (err) {
       setError(err.message);
@@ -55,8 +49,8 @@ const DashAssignedDeliveries = () => {
       if (!response.ok) throw new Error("Failed to start delivery");
 
       const updatedDelivery = await response.json();
-       toast.success("Delivery Started Successfully!");
-      fetchDeliveries()
+      toast.success("Delivery Started Successfully!");
+      fetchDeliveries();
       // Update state
       setDeliveries((prev) =>
         prev.map((d) => (d._id === deliveryId ? updatedDelivery : d))
@@ -71,7 +65,7 @@ const DashAssignedDeliveries = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6 text-center text-purple-700">
+      <h2 className="text-2xl font-bold mb-6 text-center text-green-700">
         Assigned Deliveries
       </h2>
 
@@ -81,7 +75,7 @@ const DashAssignedDeliveries = () => {
         <div className="overflow-x-auto">
           <table className="min-w-full border border-gray-300 text-sm">
             <thead>
-              <tr className="bg-purple-100">
+              <tr className="bg-green-100">
                 <th className="py-2 px-4 border-b">Order ID</th>
                 <th className="py-2 px-4 border-b">Restaurant Location</th>
                 <th className="py-2 px-4 border-b">Customer Name</th>
@@ -100,15 +94,31 @@ const DashAssignedDeliveries = () => {
               {deliveries.map((delivery) => (
                 <tr key={delivery._id} className="text-center hover:bg-gray-50">
                   <td className="py-2 px-4 border-b">{delivery.orderId}</td>
-                  <td className="py-2 px-4 border-b">{delivery.restaurantLocation}</td>
-                  <td className="py-2 px-4 border-b">{delivery.customerName}</td>
-                  <td className="py-2 px-4 border-b">{delivery.customerEmail}</td>
-                  <td className="py-2 px-4 border-b">{delivery.CustomerMobile}</td>
-                  <td className="py-2 px-4 border-b">{delivery.customerLocation}</td>
-                  <td className="py-2 px-4 border-b">Rs. {delivery.orderAmount?.toFixed(2)}</td>
-                  <td className="py-2 px-4 border-b">Rs. {delivery.delveryFee?.toFixed(2)}</td>
+                  <td className="py-2 px-4 border-b">
+                    {delivery.restaurantLocation}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {delivery.customerName}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {delivery.customerEmail}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {delivery.CustomerMobile}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {delivery.customerLocation}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    Rs. {delivery.orderAmount?.toFixed(2)}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    Rs. {delivery.delveryFee?.toFixed(2)}
+                  </td>
 
-                  <td className="py-2 px-4 border-b capitalize">{delivery.status}</td>
+                  <td className="py-2 px-4 border-b capitalize">
+                    {delivery.status}
+                  </td>
                   <td className="py-2 px-4 border-b">
                     <button
                       onClick={() => handleStartDelivery(delivery._id)}
@@ -129,7 +139,11 @@ const DashAssignedDeliveries = () => {
         </div>
       )}
 
-            <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+      />
     </div>
   );
 };
