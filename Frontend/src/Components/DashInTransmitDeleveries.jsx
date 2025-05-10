@@ -100,7 +100,8 @@ const DashInTransmitDeleveries = () => {
               <tr className="bg-purple-100">
                 <th className="py-2 px-4 border-b">Order ID</th>
                 <th className="py-2 px-4 border-b">Customer Name</th>
-         
+                <th className="py-2 px-4 border-b">Customer Email</th>
+                <th className="py-2 px-4 border-b">Customer Mobile</th>
                 <th className="py-2 px-4 border-b">Restaurant Location</th>
                 <th className="py-2 px-4 border-b">Customer Location</th>
                 <th className="py-2 px-4 border-b">Order Cost</th>
@@ -116,6 +117,8 @@ const DashInTransmitDeleveries = () => {
                 <tr key={delivery._id} className="text-center hover:bg-gray-50">
                   <td className="py-2 px-4 border-b">{delivery.orderId}</td>
                   <td className="py-2 px-4 border-b">{delivery.customerName}</td>
+                  <td className="py-2 px-4 border-b">{delivery.customerEmail}</td>
+                  <td className="py-2 px-4 border-b">{delivery.CustomerMobile}</td>
                   <td className="py-2 px-4 border-b">{delivery.restaurantLocation}</td>
                  
                   <td className="py-2 px-4 border-b">{delivery.customerLocation}</td>

@@ -85,7 +85,8 @@ const DashAssignedDeliveries = () => {
                 <th className="py-2 px-4 border-b">Order ID</th>
                 <th className="py-2 px-4 border-b">Restaurant Location</th>
                 <th className="py-2 px-4 border-b">Customer Name</th>
-
+                <th className="py-2 px-4 border-b">Customer Email</th>
+                <th className="py-2 px-4 border-b">Customer Mobile</th>
                 <th className="py-2 px-4 border-b">Customer Location</th>
                 <th className="py-2 px-4 border-b">Order Cost</th>
 
@@ -101,7 +102,8 @@ const DashAssignedDeliveries = () => {
                   <td className="py-2 px-4 border-b">{delivery.orderId}</td>
                   <td className="py-2 px-4 border-b">{delivery.restaurantLocation}</td>
                   <td className="py-2 px-4 border-b">{delivery.customerName}</td>
-
+                  <td className="py-2 px-4 border-b">{delivery.customerEmail}</td>
+                  <td className="py-2 px-4 border-b">{delivery.CustomerMobile}</td>
                   <td className="py-2 px-4 border-b">{delivery.customerLocation}</td>
                   <td className="py-2 px-4 border-b">Rs. {delivery.orderAmount?.toFixed(2)}</td>
                   <td className="py-2 px-4 border-b">Rs. {delivery.delveryFee?.toFixed(2)}</td>
