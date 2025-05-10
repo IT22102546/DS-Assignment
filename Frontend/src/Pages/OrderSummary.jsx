@@ -27,7 +27,7 @@ export default function OrderSummary() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)]">
+    <div className="min-h-screen ">
       <div className="py-10 px-6">
         <div className="px-4 pt-8 lg:pt-16">
           <h2 className="text-xl font-medium">Order Summary</h2>
@@ -56,7 +56,6 @@ export default function OrderSummary() {
           </div>
         </div>
 
-
         {/* Payment Options */}
         <div className="mt-10 px-4 pt-20 lg:mt-0">
           <h2 className="text-xl font-medium">Payment Methods</h2>
@@ -67,11 +66,14 @@ export default function OrderSummary() {
                 type="radio"
                 value="online"
                 name="payment-method"
-                className="h-4 w-4 border-gray-300 text-[#FE8180] focus:ring-2 focus:ring-[#e57373]"
+                className="h-4 w-4 border-gray-300 text-green-500 focus:ring-2 focus:ring-green-600"
                 checked={paymentMethod === "online"}
                 onChange={handlePaymentMethodChange}
               />
-              <label htmlFor="online-payment" className="ml-2 text-sm font-medium text-gray-900">
+              <label
+                htmlFor="online-payment"
+                className="ml-2 text-sm font-medium text-gray-900"
+              >
                 Online Payment
               </label>
             </div>
@@ -81,11 +83,14 @@ export default function OrderSummary() {
                 type="radio"
                 value="cod"
                 name="payment-method"
-                className="h-4 w-4 border-gray-300 text-[#FE8180] focus:ring-2 focus:ring-[#e57373]"
+                className="h-4 w-4 border-gray-300 text-green-500 focus:ring-2 focus:ring-green-600"
                 checked={paymentMethod === "cod"}
                 onChange={handlePaymentMethodChange}
               />
-              <label htmlFor="cash-on-delivery" className="ml-2 text-sm font-medium text-gray-900">
+              <label
+                htmlFor="cash-on-delivery"
+                className="ml-2 text-sm font-medium text-gray-900"
+              >
                 Cash on Delivery
               </label>
             </div>
@@ -100,10 +105,7 @@ export default function OrderSummary() {
           ) : (
             <div className="grid place-items-center my-10">
               <button
-
-                className="w-full max-w-md mx-auto block mt-100xl  bg-[#FE8180] hover:bg-[#e57373] text-white font-medium py-3 px-6 rounded-lg shadow-md"
-
-
+                className="w-full max-w-md mx-auto block   bg-green-600 hover:bg-green-700 ring-green-600 text-white font-medium py-3 px-6 rounded-lg shadow-md"
                 onClick={handleCOD}
               >
                 Proceed to Cash on Delivery

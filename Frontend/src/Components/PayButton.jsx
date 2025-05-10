@@ -38,7 +38,7 @@ const PayButton = ({ cartItems, cartTotalAmount, deliveryfee }) => {
     <div className="grid place-items-center my-10">
       <button
         onClick={handleCheckout}
-        className="w-full max-w-md mx-auto block mt-100xl  bg-[#FE8180] hover:bg-[#e57373] text-white font-medium py-3 px-6 rounded-lg shadow-md"
+        className="w-full max-w-md mx-auto block mt-100xl  bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg shadow-md"
       >
         Proceed to Payment
       </button>

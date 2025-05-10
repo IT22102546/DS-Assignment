@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
@@ -26,7 +20,7 @@ const DashDeliveredDeliveries = () => {
           throw new Error("Failed to fetch assigned deliveries");
         }
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         setDeliveries(data);
       } catch (err) {
         setError(err.message);
@@ -54,7 +48,7 @@ const DashDeliveredDeliveries = () => {
       if (!response.ok) throw new Error("Failed to finish delivery");
 
       const updatedDelivery = await response.json();
-      fetchDeliveries()
+      fetchDeliveries();
       // Update state
       setDeliveries((prev) =>
         prev.map((d) => (d._id === deliveryId ? updatedDelivery : d))
@@ -69,17 +63,19 @@ const DashDeliveredDeliveries = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6 text-center text-purple-700">
+      <h2 className="text-2xl font-bold mb-6 text-center text-green-700">
         Delivered Deliveries
       </h2>
 
       {deliveries.length === 0 ? (
-        <div className="text-center text-gray-500">No Delivered deliveries.</div>
+        <div className="text-center text-gray-500">
+          No Delivered deliveries.
+        </div>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full border border-gray-300 text-sm">
             <thead>
-              <tr className="bg-purple-100">
+              <tr className="bg-green-100">
                 <th className="py-2 px-4 border-b">Order ID</th>
                 <th className="py-2 px-4 border-b">Customer Name</th>
                 <th className="py-2 px-4 border-b">Customer Email</th>
@@ -99,16 +95,32 @@ const DashDeliveredDeliveries = () => {
               {deliveries.map((delivery) => (
                 <tr key={delivery._id} className="text-center hover:bg-gray-50">
                   <td className="py-2 px-4 border-b">{delivery.orderId}</td>
-                  <td className="py-2 px-4 border-b">{delivery.customerName}</td>
-                  <td className="py-2 px-4 border-b">{delivery.customerEmail}</td>
-                  <td className="py-2 px-4 border-b">{delivery.CustomerMobile}</td>
+                  <td className="py-2 px-4 border-b">
+                    {delivery.customerName}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {delivery.customerEmail}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {delivery.CustomerMobile}
+                  </td>
 
-                  <td className="py-2 px-4 border-b">{delivery.restaurantLocation}</td>
-                  <td className="py-2 px-4 border-b">{delivery.customerLocation}</td>
-                  <td className="py-2 px-4 border-b">Rs. {delivery.orderAmount?.toFixed(2)}</td>
-                  <td className="py-2 px-4 border-b">Rs. {delivery.delveryFee?.toFixed(2)}</td>
+                  <td className="py-2 px-4 border-b">
+                    {delivery.restaurantLocation}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {delivery.customerLocation}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    Rs. {delivery.orderAmount?.toFixed(2)}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    Rs. {delivery.delveryFee?.toFixed(2)}
+                  </td>
 
-                  <td className="py-2 px-4 border-b capitalize">{delivery.status}</td>
+                  <td className="py-2 px-4 border-b capitalize">
+                    {delivery.status}
+                  </td>
                   {/* <td className="py-2 px-4 border-b">
                     <button
                     //   onClick={() => handleStartDelivery(delivery._id)}
