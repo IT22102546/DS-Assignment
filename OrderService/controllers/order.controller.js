@@ -2,6 +2,7 @@ import Order from "../models/order.model.js";
 
 import { mongoose } from "mongoose";
 import { errorHandler } from "../utils/error.js";
+import User from "../models/user.model.js";
 //import User from "../models/user.model.js";
 
 //test order

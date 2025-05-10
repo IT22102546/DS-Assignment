@@ -2,14 +2,26 @@ import express from 'express';
 import  deliverRoute from "./Routes/Delivery.js"
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import cors from "cors";
+
+
 dotenv.config();
 const app = express();
 
-dotenv.config();
+app.use(express.json());
 const port = process.env.PORT;
 const mongoURI =process.env.MONGODBURL
 
+
+
+const corsOptions = {
+  origin: 'http://localhost:5173', // Allow only your frontend URL
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
+app.use(cors(corsOptions));
+
 app.use("/api/delivery",deliverRoute)
+
 
 
 // Define a simple route
