@@ -31,20 +31,6 @@ export const createOrder = async (req, res, next) => {
     return next(errorHandler(400, "Please provide all required fields"));
   }
 
-  // Log each field to see the values being passed
-  console.log("userId:", req.body.userId);
-  console.log("productsId:", req.body.productsId);
-  console.log("first_name:", req.body.first_name);
-  console.log("last_name:", req.body.last_name);
-  console.log("email:", req.body.email);
-  console.log("phone:", req.body.phone);
-  console.log("address:", req.body.address);
-  console.log("state:", req.body.city);
-  console.log("zip:", req.body.zip);
-  console.log("subtotal:", req.body.subtotal);
-  console.log("deliveryfee:", req.body.deliveryfee);
-  console.log("totalcost:", req.body.totalcost);
-
   const userId = req.body.userId;
   const productsId = req.body.productsId;
   const first_name = req.body.first_name;
@@ -87,9 +73,41 @@ export const createOrder = async (req, res, next) => {
 
   try {
     const savedOrder = await newOrder.save();
+
+    // Prepare email content
+    const emailContent = {
+      to: email,
+      text: `Dear ${first_name} ${last_name},\n\nThank you for your order with OB Taste!\n\nOrder Details:\nOrder ID: ${orderId}\nDate: ${new Date().toLocaleDateString()}\nTotal Amount: $${totalcost}\n\nDelivery Address:\n${address}\n${city}, ${zip}\n\nWe'll notify you once your order ships.\n\nBest regards,\nOB Taste Team`,
+      subject: "Your OB Taste Order Confirmation",
+    };
+
+    // Send email notification using fetch
+    try {
+      const notificationServiceUrl =
+        "http://notification-service:4006/email/send-email";
+
+      const response = await fetch(notificationServiceUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(emailContent),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Email notification sent successfully:", data);
+    } catch (emailError) {
+      console.error("Failed to send email notification:", emailError);
+      // Continue even if email fails - you might want to log this to a monitoring system
+    }
+
     res.status(201).json(savedOrder);
   } catch (error) {
-    console.error("Error saving order:", error); // Log the error if saving fails
+    console.error("Error saving order:", error);
     next(error);
   }
 };
@@ -208,8 +226,6 @@ export const updateOrderStatus = async (req, res, next) => {
   }
 };
 
-
-
 export const FinishOrder = async (req, res, next) => {
   try {
     const { orderId } = req.params;
@@ -255,8 +271,6 @@ export const FinishOrder = async (req, res, next) => {
     next(error);
   }
 };
-
-
 
 export const getOrdersByCustomerId = async (req, res, next) => {
   try {
