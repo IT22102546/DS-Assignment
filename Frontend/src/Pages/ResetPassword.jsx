@@ -92,7 +92,7 @@ export default function ResetPassword() {
     <div className="relative min-h-screen flex items-center justify-center bg-gray-50 px-4 py-8 sm:px-6 lg:px-8">
       {/* Animated Background */}
       <motion.div
-        className="absolute top-0 left-0 w-full md:w-1/2 h-full bg-gradient-to-br from-pink-100 via-white to-pink-200"
+        className="absolute top-0 left-0 w-full md:w-1/2 h-full bg-gradient-to-br from-green-100 via-white to-green-200"
         initial={{ x: "100%", borderRadius: "0%" }}
         animate={{
           x: "0%",
@@ -184,7 +184,7 @@ export default function ResetPassword() {
             <div>
               <Button
                 type="submit"
-                className="w-full bg-[#FE8180] hover:bg-[#fe6e6d] focus:ring-4 focus:ring-pink-200"
+                className="w-full bg-[#4CAF50] hover:bg-[#45a049] focus:ring-4 focus:ring-green-200"
               >
                 Reset Password
               </Button>
@@ -206,7 +206,7 @@ export default function ResetPassword() {
           <div className="mt-6 text-center">
             <Link
               to="/sign-in"
-              className="text-sm font-medium text-[#FE8180] hover:text-[#fe6e6d]"
+              className="text-sm font-medium text-[#4CAF50] hover:text-[#45a049]"
             >
               Back to SignIn
             </Link>
