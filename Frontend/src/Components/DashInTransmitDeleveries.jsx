@@ -14,6 +14,8 @@ const DashInTransmitDeleveries = () => {
   const [error, setError] = useState(null);
   const apiUrl = import.meta.env.VITE_DELIVERY_API_URL;
   const emailApi = import.meta.env.VITE_EMAIL_API_URL;
+
+  const apiOrderUrl = import.meta.env.VITE_ORDER_API_URL;
   useEffect(() => {
     if (!currentUser) return;
 
@@ -41,9 +43,9 @@ const DashInTransmitDeleveries = () => {
     } finally {
       setLoadingDeliveries(false);
     }
-  };
-  const handleStartDelivery = async (deliveryId) => {
+  };const handleStartDelivery = async (deliveryId) => {
     try {
+      // Step 1: Update delivery status to "delivered"
       const response = await fetch(
         `${apiUrl}/api/delivery/update-status/${deliveryId}`,
         {
@@ -55,29 +57,46 @@ const DashInTransmitDeleveries = () => {
         }
       );
   
-      if (!response.ok) throw new Error("Failed to start delivery");
+      if (!response.ok) throw new Error("Failed to update delivery status");
   
       const updatedDelivery = await response.json();
-  console.log(updatedDelivery)
-      // ✅ Send email to customer after successful delivery
+      console.log("Updated delivery:", updatedDelivery);
+  
+      // ✅ Step 2: Update order status to "handover"
+      const orderStatusResponse = await fetch(
+        `${apiOrderUrl}/api/order/finish-delivery/${updatedDelivery.orderId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            status: "handover",
+            deliveryPerson: updatedDelivery.deliveryPerson, // assumes deliveryPerson is part of updatedDelivery
+          }),
+        }
+      );
+  
+      if (!orderStatusResponse.ok) throw new Error("Failed to update order status");
+  
+      const updatedOrder = await orderStatusResponse.json();
+      console.log("Updated order:", updatedOrder);
+  
+      // ✅ Step 3: Send email to customer
       await fetch(`${emailApi}/email/send-email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          to: updatedDelivery.customerEmail, // 🔁 Make sure this is included in delivery data
+          to: "anushkasiyambalapitiya.edu01@gmail.com",
           text: `Dear ${updatedDelivery.customerName}, your order (REF: ${updatedDelivery.orderId}) has been successfully delivered. Thank you!`,
         }),
       });
   
       fetchDeliveries(); // refresh delivery list
-  
-      // Optional: show a success toast
-      toast.success("Delivery marked as complete and email sent!");
+      toast.success("Delivery completed, order updated, and email sent!");
     } catch (err) {
-      console.error("Error completing delivery:", err);
-      toast.error("Failed to complete delivery or send email");
+      console.error("Error completing delivery process:", err);
+      toast.error("Failed to complete delivery or related steps");
     }
   };
   

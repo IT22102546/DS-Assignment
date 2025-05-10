@@ -81,7 +81,7 @@ services:
     depends_on:
       - mongo_inventory
     restart: unless-stopped
-# Delivery Service
+# Delivery Service  # Delivery Service
   delivery-service:
     build:
       context: ./DeliveryService
@@ -92,10 +92,12 @@ services:
     networks:
       - app-network
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
+      - MONGO_URI=mongodb+srv://anushkasiyambalapitiya:anushka0770380981@personal-finance-tracke.apf6l.mongodb.net/DeliveryService?retryWrites=true&w=majority&appName=Personal-Finance-Tracker
     depends_on:
       - mongo 
     restart: unless-stopped
+
 
   # Notification Service
   notification-service:

@@ -65,7 +65,6 @@ const DashDeliveryPerson = () => {
       [name]: name === "deliveryFee" ? parseFloat(value) : value,
     }));
   };
-
   const handleSaveDelivery = () => {
     fetch(`${deliveryApi}/api/delivery/create`, {
       method: "POST",
@@ -74,13 +73,12 @@ const DashDeliveryPerson = () => {
         orderId: formData.orderId,
         deliveryPerson: currentUser._id,
         customerName: `${selectedOrder.first_name} ${selectedOrder.last_name}`,
-        customerEmail:formData.customerEmail,
-   
-        CustomerMobile:formData. CustomerMobile,
+        customerEmail: formData.customerEmail,
+        CustomerMobile: formData.CustomerMobile,
         customerLocation: formData.customerLocation,
         restaurantLocation: formData.restaurantLocation,
         delveryFee: formData.deliveryFee,
-        orderAmount:formData.orderAmount
+        orderAmount: formData.orderAmount
       }),
     })
       .then((res) => {
@@ -89,35 +87,54 @@ const DashDeliveryPerson = () => {
       })
       .then((deliveryData) => {
         console.log("Delivery created successfully:", deliveryData);
-console.log("current" ,currentUser)
+  
         // Send email
         return fetch(`${emailApi}/email/send-email`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             to: formData.customerEmail,
-            text:`Dear ${formData.customerName}, your order (REF: ${formData.orderId}) is now on the way.
-
-Delivered by: ${currentUser.username}
-Contact: ${currentUser.mobile}
-email :${currentUser.email}
-
-Thank you for choosing our service!`,
+            text: `Dear ${formData.customerName}, your order (REF: ${formData.orderId}) is now on the way.
+  
+  Delivered by: ${currentUser.username}
+  Contact: ${currentUser.mobile}
+  Email: ${currentUser.email}
+  
+  Thank you for choosing our service!`,
           }),
+        }).then((res) => {
+          if (!res.ok) throw new Error("Failed to send email");
+          return res.json();
+        }).then((emailData) => {
+          console.log("Email sent:", emailData.message);
+  
+          // ✅ Call update-status API
+          return fetch(`${apiUrl}/api/order/update-status/${formData.orderId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              status: "handover",
+              deliveryPerson: currentUser._id
+            }),
+          });
         });
       })
-      .then((res) => res.json())
-      .then((emailData) => {
-        console.log("Email sent:", emailData.message);
-        toast("Delivery created successfully")
-        setShowModal(false); // Close modal after success
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to update order status");
+        return res.json();
+      })
+      .then((updatedOrderData) => {
+        console.log("Order status updated:", updatedOrderData);
+        toast("Delivery created and status updated successfully");
+        setShowModal(false);
         closeModal();
-        toast("Delivery created successfully")
       })
       .catch((err) => {
         console.error("Error:", err);
+        toast.error(err.message || "Something went wrong");
       });
   };
+  
 
   const closeModal = () => {
     setShowModal(false);
@@ -171,12 +188,18 @@ Thank you for choosing our service!`,
                   </td>
                   <td className="py-2 px-4 border-b capitalize">{order.status}</td>
                   <td className="py-2 px-4 border-b space-x-2">
-                    <button
-                      onClick={() => handleAcceptClick(order)}
-                      className="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded"
-                    >
-                      Accept
-                    </button>
+                  <button
+  onClick={() => handleAcceptClick(order)}
+  disabled={order.status !== "paid"}
+  className={`py-1 px-2 rounded text-white ${
+    order.status === "paid"
+      ? "bg-green-500 hover:bg-green-600"
+      : "bg-gray-400 cursor-not-allowed"
+  }`}
+>
+  Accept
+</button>
+
                     <button
                       onClick={() => handleView(order._id)}
                       className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
