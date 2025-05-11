@@ -77,7 +77,7 @@ export const createOrder = async (req, res, next) => {
     // Prepare email content
     const emailContent = {
       to: email,
-      text: `Dear ${first_name} ${last_name},\n\nThank you for your order with OB Taste!\n\nOrder Details:\nOrder ID: ${orderId}\nDate: ${new Date().toLocaleDateString()}\nTotal Amount: $${totalcost}\n\nDelivery Address:\n${address}\n${city}, ${zip}\n\nWe'll notify you once your order ships.\n\nBest regards,\nOB Taste Team`,
+      text: `Dear ${first_name} ${last_name},\n\nThank you for your order with OB Taste!\n\nOrder Details:\nOrder ID: ${orderId}\nDate: ${new Date().toLocaleDateString()}\nTotal Amount: Rs. ${totalcost}\n\nDelivery Address:\n${address}\n${city}, ${zip}\n\nWe'll notify you once your order ships.\n\nBest regards,\nOB Taste Team`,
       subject: "Your OB Taste Order Confirmation",
     };
 

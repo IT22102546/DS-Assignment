@@ -178,7 +178,8 @@ export default function DashSideBar() {
               </Link>
             </>
           )}
-
+          <hr />
+          <h1 className="text-[10px]">Shop Owner & ADMIN</h1>
           {currentUser?.isAdmin && (
             <>
               <Link to="/dashboard?tab=cakes" key="cakes">
