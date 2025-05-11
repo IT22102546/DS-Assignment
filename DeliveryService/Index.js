@@ -10,7 +10,7 @@ const app = express();
 
 app.use(express.json());
 const port = process.env.PORT;
-const mongoURI =process.env.MONGODBURL
+const mongoURI =process.env.MONGO_URI
 
 
 

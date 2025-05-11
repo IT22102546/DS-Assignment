@@ -69,7 +69,7 @@ const DashInTransmitDeleveries = () => {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            status: "handover",
+            status: "delivered",
             deliveryPerson: updatedDelivery.deliveryPerson, // assumes deliveryPerson is part of updatedDelivery
           }),
         }
