@@ -69,8 +69,8 @@ export default function AllProducts() {
   };
 
   return (
-    <div className="p-6 min-h-screen bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)]">
-      <h1 className="text-3xl font-bold text-center text-pink-700">{shopName}</h1>
+    <div className="p-6 min-h-screen bg-white">
+      <h1 className="text-3xl font-bold text-center text-green-700">{shopName}</h1>
       <p className="text-center text-gray-600 mb-6">{shopAddress || "No address available"}</p>
 
       <div className="flex justify-center mb-6">
@@ -78,14 +78,14 @@ export default function AllProducts() {
           onClick={() => setFilteredProducts(cakes)}
           className="flex flex-col items-center focus:outline-none"
         >
-          <div className="w-16 h-16 rounded-full flex items-center justify-center border-4 border-pink-600 bg-pink-200">
+          <div className="w-16 h-16 rounded-full flex items-center justify-center border-4 border-green-600 bg-green-200">
             <img
               src="https://i.pinimg.com/736x/ee/4e/fd/ee4efd0d960b477e4dc0373c2837f7a2.jpg"
               alt="Cakes"
               className="w-12 h-12 object-cover rounded-full"
             />
           </div>
-          <span className="text-sm mt-2 font-medium text-pink-700">Cakes</span>
+          <span className="text-sm mt-2 font-medium text-green-700">Cakes</span>
         </button>
       </div>
 
@@ -133,7 +133,7 @@ export default function AllProducts() {
                 </span>
               </p>
               <button
-                className={`bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-700 transition-all ${
+                className={`bg-green-400 text-white px-4 py-2 rounded hover:bg-green-700 transition-all ${
                   !product.isAvailable ? "cursor-not-allowed bg-gray-400" : ""
                 }`}
                 onClick={() => handleAddToCart(product)}
