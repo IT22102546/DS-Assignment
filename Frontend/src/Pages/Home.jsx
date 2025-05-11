@@ -8,7 +8,7 @@ import banner3 from "../assets/banner-3.png";
 
 export default function Home() {
   return (
-    <div className="bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)]">
+    <div className="bg-white">
       {/* Carousel Section */}
       <div className="mb-10">
         <Carousel
