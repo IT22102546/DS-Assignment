@@ -15,6 +15,7 @@ export default function UpdateOrder() {
     const [selectedDeliveryPerson, setSelectedDeliveryPerson] = useState('');
     const { orderId } = useParams();
     const navigate = useNavigate();
+    const apiUrl = import.meta.env.VITE_Inventory_API_URL;
 
     useEffect(() => {
         const fetchOrderAndDeliveryPersons = async () => {
@@ -22,7 +23,7 @@ export default function UpdateOrder() {
                 setLoading(true);
                 
                 // Fetch order details
-                const orderRes = await fetch(`/api/order/getorder/${orderId}`);
+                const orderRes = await fetch(`${apiUrl}/api/inventory/getorder/${orderId}`);
                 const orderData = await orderRes.json();
                 
                 if (orderRes.ok) {
@@ -38,7 +39,7 @@ export default function UpdateOrder() {
                 }
                 
                 // Fetch available delivery persons (riders)
-                const deliveryRes = await fetch('/api/user/getriders');
+                const deliveryRes = await fetch(`${apiUrl}/api/inventory/getriders`);
                 const deliveryData = await deliveryRes.json();
                 
                 if (deliveryRes.ok) {
@@ -81,7 +82,7 @@ export default function UpdateOrder() {
                 updateData.deliveryPerson = selectedDeliveryPerson;
             }
             
-            const res = await fetch(`/api/order/update-status/${orderId}`, {
+            const res = await fetch(`${apiUrl}/api/inventory/update-status/${orderId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

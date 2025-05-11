@@ -8,6 +8,7 @@ export default function ForgetPassword() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const apiUrl = import.meta.env.VITE_User_API_URL;
 
   const handleChange = (e) => {
     setEmail(e.target.value);
@@ -29,7 +30,7 @@ export default function ForgetPassword() {
 
     setLoading(true);
     try {
-      const res = await fetch("/api/user/forgetpassword", {
+      const res = await fetch(`${apiUrl}/api/user/forgetpassword`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

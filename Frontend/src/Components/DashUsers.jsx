@@ -25,12 +25,13 @@ export default function DashUsers() {
   const [showRidersOnly, setshowRidersOnly] = useState(false); 
   const [showAccessConfirmation, setShowAccessConfirmation] = useState(false);
   const [showAccessDeclaration, setShowAccessDeclaration] = useState(false);
+  const apiUrl = import.meta.env.VITE_Admin_API_URL;
 
   useEffect(() => {
     if (showAdminsOnly) {
       const fetchAdmins = async () => {
         try {
-          const res = await fetch('http://localhost:3999/api/admin/getadmins');
+          const res = await fetch(`${apiUrl}/api/admin/getadmins`);
           const data = await res.json();
           if (res.ok) {
             setUsers(data.admins);
@@ -44,10 +45,10 @@ export default function DashUsers() {
        } else if (showCustomersOnly) {
       const fetchCustomers = async () => {
         try {
-          const res = await fetch('http://localhost:3999/api/admin/getcustomers');
+          const res = await fetch(`${apiUrl}/api/admin/getcustomers`);
           const data = await res.json();
           if (res.ok) {
-            setUsers(data.admins);
+            setUsers(data.customers);
           }
           setShowMore(false);
         } catch (error) {
@@ -73,7 +74,7 @@ export default function DashUsers() {
       
       const fetchAllUsers = async () => {
         try {
-          const res = await fetch(`http://localhost:3999/api/admin/getusers?searchTerm=${searchTerm}`);
+          const res = await fetch(`${apiUrl}/api/admin/getusers?searchTerm=${searchTerm}`);
           const data = await res.json();
           if (res.ok) {
             setUsers(data.users);

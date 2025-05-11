@@ -23,7 +23,7 @@ export default function CakePage({ searchTermFromHeader }) {
 
   const { search: searchQuery } = queryString.parse(location.search);
   const [searchTerm, setSearchTerm] = useState(searchQuery || '');
-
+  const apiUrl = import.meta.env.VITE_Inventory_API_URL;
   const categories = ['Birthday', 'Wedding', 'Anniversary', 'Custom'];
   const priceRanges = [
     { label: 'Under Rs. 1000', value: '0-1000' },
@@ -55,7 +55,7 @@ export default function CakePage({ searchTermFromHeader }) {
   const fetchProducts = async () => {
     try {
       const res = await fetch(
-        `http://localhost:4003/api/inventory/getcakes?searchTerm=${searchTerm}&category=${selectedCategory}&priceRange=${selectedPriceRange}&page=${currentPage}`
+        `${apiUrl}/api/inventory/getcakes?searchTerm=${searchTerm}&category=${selectedCategory}&priceRange=${selectedPriceRange}&page=${currentPage}`
       );
       const data = await res.json();
       if (res.ok) {

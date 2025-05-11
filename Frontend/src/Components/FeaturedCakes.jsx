@@ -9,7 +9,7 @@ export default function FeaturedProducts() {
   const [usernames, setUsernames] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3); // Default value
-
+  const apiUrl = import.meta.env.VITE_Inventory_API_URL;
   const { currentUser: user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ export default function FeaturedProducts() {
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
       try {
-        const res = await fetch("http://localhost:4003/api/inventory/featured");
+        const res = await fetch(`${apiUrl}/api/inventory/featured`);
         const data = await res.json();
         if (res.ok) {
           setFeaturedProducts(data);
@@ -49,7 +49,7 @@ export default function FeaturedProducts() {
     const fetchedUsernames = {};
     for (const product of products) {
       try {
-        const res = await fetch(`http://localhost:4003/api/inventory/getshopById/${product.userId}`);
+        const res = await fetch(`${apiUrl}/api/inventory/getshopById/${product.userId}`);
         const data = await res.json();
         if (res.ok) {
           fetchedUsernames[product.userId] = data.username;

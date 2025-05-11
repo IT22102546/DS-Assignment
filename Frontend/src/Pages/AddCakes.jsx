@@ -27,7 +27,7 @@ export default function AddCakes() {
   const [publishError, setPublishError] = useState(null);
   const navigate = useNavigate();
   const [mainImageIndex, setMainImageIndex] = useState(0);
-
+  const apiUrl = import.meta.env.VITE_Inventory_API_URL;
   const handleFileChange = (index, file) => {
     const newFiles = [...files];
     newFiles[index] = file;
@@ -88,7 +88,7 @@ export default function AddCakes() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:4003/api/inventory/create", {
+      const res = await fetch(`${apiUrl}/api/inventory/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
