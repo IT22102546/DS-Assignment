@@ -1,16 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function CheckoutSuccess() {
   return (
-    <div className="p-6 bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)] min-h-screen">
+    <div className="p-6 min-h-screen">
       <style jsx global>{`
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
         @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
         }
         .animate-fade-in {
           animation: fadeIn 1s ease-out forwards;
@@ -27,22 +38,22 @@ export default function CheckoutSuccess() {
       `}</style>
 
       <div className="text-center pt-36">
-        <h1 className="text-4xl font-semibold font-cinzel text-pink-800 animate-fade-in">
+        <h1 className="text-4xl font-semibold font-cinzel text-green-800 animate-fade-in">
           Your order placed successfully
         </h1>
-        <h2 className="text-xl text-pink-500 animate-fade-in animate-delay-100">
+        <h2 className="text-xl text-green-500 animate-fade-in animate-delay-100">
           Seller is preparing your package for delivery
         </h2>
-        <img 
-          src="https://tse3.mm.bing.net/th?id=OIP.A5zQE0TYyCTaRL47OjfKrAHaD1&pid=Api&P=0&h=220" 
-          alt="package" 
+        <img
+          src="https://tse3.mm.bing.net/th?id=OIP.A5zQE0TYyCTaRL47OjfKrAHaD1&pid=Api&P=0&h=220"
+          alt="package"
           className="w-64 mx-auto mt-10 animate-fade-in animate-delay-200 animate-bounce-slow"
         />
       </div>
-      
+
       <div className="flex flex-wrap justify-center gap-20 pb-56 pt-5">
         <Link to="/">
-          <button className="rounded-full py-4 px-6 w-full max-w-[280px] flex items-center bg-[#FE8180] hover:bg-[#e57373] justify-center transition-all duration-500 hover:scale-105">
+          <button className="rounded-full py-4 px-6 w-full max-w-[280px] flex items-center bg-green-600 hover:bg-green-800 justify-center transition-all duration-500 hover:scale-105">
             <span className="px-2 font-semibold text-lg leading-8 text-white font-cinzel">
               Go back to Home
             </span>
@@ -50,7 +61,7 @@ export default function CheckoutSuccess() {
         </Link>
 
         <Link to="/products">
-          <button className="rounded-full py-4 px-6 w-full max-w-[280px] flex items-center bg-[#FE8180] hover:bg-[#e57373] justify-center transition-all duration-500 hover:scale-105">
+          <button className="rounded-full py-4 px-6 w-full max-w-[280px] flex items-center bg-green-600 hover:bg-green-800 justify-center transition-all duration-500 hover:scale-105">
             <span className="px-2 font-semibold text-lg leading-8 text-white font-cinzel">
               Continue Shopping
             </span>

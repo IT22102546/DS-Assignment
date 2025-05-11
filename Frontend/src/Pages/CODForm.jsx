@@ -67,7 +67,7 @@ export default function DeliveryDetails() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4 bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)]">
+    <div className="flex items-center justify-center min-h-screen p-4">
       <style jsx global>{`
         @keyframes fadeIn {
           from {
@@ -99,9 +99,9 @@ export default function DeliveryDetails() {
       <div className="w-full max-w-3xl mx-auto">
         <div className=" rounded-xl shadow-lg overflow-hidden hover-scale transition-all duration-300">
           {/* Header */}
-          <div className="bg-gradient-to-b from-[rgba(254,129,128,0.3)] via-[rgba(255,255,255,0.3)] to-[rgba(254,143,142,0.3)] p-6 text-center animate-fade-in">
-            <h2 className="text-3xl font-bold text-pink-800 flex items-center justify-center gap-2">
-              <FaTruck className="text-pink-600" /> Delivery Details
+          <div className="p-6 text-center animate-fade-in">
+            <h2 className="text-3xl font-bold text-green-800 flex items-center justify-center gap-2">
+              <FaTruck className="text-green-600" /> Delivery Details
             </h2>
           </div>
 
@@ -221,7 +221,7 @@ export default function DeliveryDetails() {
                 </div>
               </div>
 
-              <button className="w-full max-w-md mx-auto mt-10 bg-[#FE8180] hover:bg-[#e57373] text-white font-medium py-3 px-6 rounded-lg shadow-md flex items-center justify-center gap-2">
+              <button className="w-full max-w-md mx-auto mt-10 bg-green-600 hover:bg-green-800 text-white font-medium py-3 px-6 rounded-lg shadow-md flex items-center justify-center gap-2">
                 <FaTruck className="text-white" />
                 <span>Place Order</span>
               </button>
